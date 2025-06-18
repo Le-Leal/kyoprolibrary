@@ -15,7 +15,7 @@ using namespace std;
 #define srep(i,l,r) for(ll i=l;i<=r;i++)
 using ll = long long;
 using ld = long double;
-const ll mod=998244353;
+constexpr ll mod=998244353;
 #define vout(v) for(auto i :v) cout<<i<<" ";
 #define INF 9223300000000000000ll
 #define Winf 5e12
@@ -23,4 +23,7 @@ const ll mod=998244353;
 #define all(a) a.begin(),a.end()
 #define rall(a) a.rbegin(),a.rend()
 #define vl vector<ll>
+#define vb vector<bool>
+#define pb push_back
+
 #endif

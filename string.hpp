@@ -1,4 +1,5 @@
 string sp(string &s) { //manacher;
+    //まるごとほしい時はradを返すように変更する
     string t="*#";
     rep(i,(ll)s.size()) {
         t+=s[i];

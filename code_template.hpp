@@ -4,21 +4,7 @@
 #include __FILE__
 
 int main(){
-    ll n;
-    cin>>n;
-    vector<vector<char>> f1(n,vector<char>(n)),f2(n,vector<char>(n));
-    rep(i,n) rep(j,n) cin>>f1[i][j];
-    rep(i,n) rep(j,n) cin>>f2[i][j];
-    ll ans=INF;
-    rep(ii,4) {
-        ll cur=ii;
-        rep(i,n) rep(j,n) {
-            if(f1[i][j]!=f2[i][j]) cur++;
-        }
-        ans=min(ans,cur);
-        f1=rotate(f1,n);
-    }
-    cout<<ans<<nl;
+    
 }
 
 /////// library zone ///////

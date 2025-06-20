@@ -11,7 +11,7 @@ class factset {
             }
             _inv[__n]=modpow(_fact[__n],mod-2,1);
             for(int i=__n-1;i>=0;i--) {
-                _inv[i]=_inv[i+1]*i;
+                _inv[i]=_inv[i+1]*(i+1);
                 _inv[i]%=mod;
             }
         }

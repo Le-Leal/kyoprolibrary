@@ -1,36 +1,37 @@
-class factset {
-    public:
-        vl _fact;
-        vl _inv;
-        ll __n;
-        factset(ll n):_fact(n+1),_inv(n+1),__n(n) {
-            _fact[0]=1;
-            srep(i,1,__n) {
-                _fact[i]=_fact[i-1]*i;
-                _fact[i]%=mod;
-            }
-            _inv[__n]=modpow(_fact[__n],mod-2,1);
-            for(int i=__n-1;i>=0;i--) {
-                _inv[i]=_inv[i+1]*(i+1);
-                _inv[i]%=mod;
-            }
-        }
-        ll fact(ll x) {
-            assert(0<=x && x<=__n);
-            return _fact[x];
-        }
-        ll inv(ll x) {
-            assert(0<=x && x<=__n);
-            return _inv[x];
-        }
+template <class T> void vecpr(T first,T last) {Add commentMore actions
+    ll tmp=0;
+    for(auto it=first;it!=last;++it) {
+        if(tmp) cout<<" ";
+        cout<<*it;
+        tmp++;
+    }
+    cout<<endl;
+}
 
-        ll comb(ll nn,ll k,ll mode) {
-            ll ans=1;
-            ans*=_fact[nn];
-            ans%=mod;
-            ans*=_inv[nn-k];
-            ans%=mod;
-            ans*=_inv[k];
-            return ans%mod;
-        }
-};
+ll vecmax(vector<ll> &a) {
+    ll ans=-1*INF;
+    rep(i,(ll)a.size()) {
+        ans=max(ans,a[i]);
+    }
+    return ans;
+}
+
+ll vecmin(vector<ll> &a) {
+    ll ans=INF;
+    rep(i,(ll)a.size()) {
+        ans=min(ans,a[i]);
+    }
+    return ans;
+}
+
+void no() { cout<<"No"<<nl;}
+void yes() { cout<<"Yes"<<nl;}
+void yn(bool a) {
+    cout<<(a ? "Yes":"No")<<nl;
+}
+
+ll sum(vector<ll>& a) {
+    ll ans=0;
+    for(auto i:a) ans+=i;
+    return ans;
+}

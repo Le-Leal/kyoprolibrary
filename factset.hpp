@@ -19,7 +19,7 @@ class factset {
             assert(0<=x && x<=__n);
             return _fact[x];
         }
-        ll inv(x) {
+        ll inv(ll x) {
             assert(0<=x && x<=__n);
             return _inv[x];
         }

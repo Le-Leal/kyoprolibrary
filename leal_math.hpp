@@ -86,7 +86,7 @@ vector<ll> Erasieve(ll n) {
 
 vector<ll> Erasieve_segment(ll lef,ll rig) { //lef以上rig以下の素数の列を返す
     vector<bool> isprime(1100000,true);
-    vector<bool> isp2(rig-lef+1) //[i]はlef+iが素数か？
+    vector<bool> isp2(rig-lef+1,true) //[i]はlef+iが素数か？
     for(ll p=2 ; p*p<=rig ; p++) {
         if (!isprime[p]) continue;
         for(ll q=p*2 ; q*q<=rig ; q+=p) {
@@ -95,7 +95,7 @@ vector<ll> Erasieve_segment(ll lef,ll rig) { //lef以上rig以下の素数の列
         ll start=(lef+p-1)/p*p;
         if (start==p) start=p*2;
         for (ll q=start ; q<=rig ; q+=p) {
-            isprime2[q-lef]=false;
+            isp2[q-lef]=false;
         }
     }
     vl res;

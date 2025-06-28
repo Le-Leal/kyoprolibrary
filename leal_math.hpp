@@ -83,6 +83,46 @@ vector<ll> Erasieve(ll n) {
     return primes;
 }
 
+
+vector<ll> Erasieve_segment(ll lef,ll rig) { //lef以上rig以下の素数の列を返す
+    vector<bool> isprime(1100000,true);
+    vector<bool> isp2(rig-lef+1) //[i]はlef+iが素数か？
+    for(ll p=2 ; p*p<=rig ; p++) {
+        if (!isprime[p]) continue;
+        for(ll q=p*2 ; q*q<=rig ; q+=p) {
+            isprime[q]=false;
+        }
+        ll start=(lef+p-1)/p*p;
+        if (start==p) start=p*2;
+        for (ll q=start ; q<=rig ; q+=p) {
+            isprime2[q-lef]=false;
+        }
+    }
+    vl res;
+    rep(i,rig-lef+1) {
+        if(isp2[i]) res.pb(lef+i);
+    }
+    return res;
+}
+
+
+vector<vector<pair<ll,int>>> factor_range(ll L,ll R){ //lef以上rig以下のものの、素因数分解の結果を(因数、指数)で返す O(min(r-l,sqrt(r)))
+    ll n=R-L+1;
+    vector<ll> v(n);
+    iota(v.begin(),v.end(),L);
+    vector<vector<pair<ll,int>>> res(n);
+    for(ll p=2; p*p<=R; ++p){
+        ll s=max(p*p,(L+p-1)/p*p);
+        for(ll j=s; j<=R; j+=p){
+            int i=j-L, c=0;
+            while(v[i] % p == 0) v[i]/=p, ++c;
+            if(c) res[i].emplace_back(p,c);
+        }
+    }
+    rep(i,n) if(v[i] > 1) res[i].emplace_back(v[i],1);
+    return res;
+}
+
 ll divcount(ll n) {
     ll ans=0;
     for(int i=1;i*i<=n;i++) {

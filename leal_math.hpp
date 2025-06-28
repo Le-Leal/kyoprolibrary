@@ -84,24 +84,27 @@ vector<ll> Erasieve(ll n) {
 }
 
 
-vector<ll> Erasieve_segment(ll lef,ll rig) { //lef以上rig以下の素数の列を返す
-    vector<bool> isprime(1100000,true);
-    vector<bool> isp2(rig-lef+1,true) //[i]はlef+iが素数か？
-    for(ll p=2 ; p*p<=rig ; p++) {
+vector<ll> Erasieve_segment(ll lef, ll rig) {
+    ll M = floor(sqrt(rig)+100);
+    vector<bool> isprime(M+1,true);
+    isprime[0]=isprime[1]=false;
+    for (ll p=2; p*p<=M; ++p) {
         if (!isprime[p]) continue;
-        for(ll q=p*2 ; q*q<=rig ; q+=p) {
-            isprime[q]=false;
-        }
-        ll start=(lef+p-1)/p*p;
-        if (start==p) start=p*2;
-        for (ll q=start ; q<=rig ; q+=p) {
-            isp2[q-lef]=false;
-        }
+        for (ll q=p*p; q<=M; q+=p) isprime[q]=false;
     }
-    vl res;
-    rep(i,rig-lef+1) {
-        if(isp2[i]) res.pb(lef+i);
+
+    vector<bool> isp2(rig-lef+1,true);
+    for (ll p=2; p<=M; ++p) {
+        if (!isprime[p]) continue;
+        ll start=max(p*p,((lef+p-1)/p)*p);
+        for (ll q=start; q<=rig; q+=p)
+            isp2[q-lef] = false;
     }
+    vector<ll> res;
+
+    for (ll x=max(lef,2LL) ; x<=rig ; ++x)
+        if (isp2[x-lef])
+            res.push_back(x);
     return res;
 }
 

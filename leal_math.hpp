@@ -109,7 +109,8 @@ vector<ll> Erasieve_segment(ll lef, ll rig) {
 }
 
 
-vector<vector<pair<ll,int>>> factor_range(ll L,ll R){ //lef以上rig以下のものの、素因数分解の結果を(因数、指数)で返す O(min(r-l,sqrt(r)))
+
+vector<vector<pair<ll,int>>> factor_range(ll L,ll R){ //lef以上rig以下のものの、素因数分解の結果を(因数、指数)で返す O(max(r-l,sqrt(r))) //遅め
     ll n=R-L+1;
     vector<ll> v(n);
     iota(v.begin(),v.end(),L);

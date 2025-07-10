@@ -9,6 +9,14 @@ template<typename t> class segtree {  //c.f.to ->https://hackmd.io/@tatyam-prime
             while(siz<n) siz*=2;
             seg = vector<t>(2*siz,e());
         }
+
+        segtree(ll n,function<t(t,t)> op,function<t()>e,vector<t> a) :n(n),op(op),e(e) {
+            while(siz<n) siz*=2;
+            seg = vector<t>(2*siz,e());
+            for(int i=0;i<n;i++) seg[siz+i]=a[i];
+            for(int i=siz-1;i>0;i--) seg[i]=op(seg[2*i],seg[2*i+1]);
+        }
+
         void set(ll ind,t val) {
             ind+=siz;
             seg[ind]=val;

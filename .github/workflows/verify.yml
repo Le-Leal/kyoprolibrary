@@ -19,7 +19,7 @@ jobs:
           override: true
 
       - name: Install oj-verify
-        run: cargo install --git https://github.com/online-judge-tools/verification-helper.git --package oj-verify
+        run: cargo install --git https://github.com/online-judge-tools/verification-helper.git oj-verify
 
       - name: Run verify
         run: oj-verify run

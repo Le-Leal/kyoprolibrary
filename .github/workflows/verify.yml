@@ -1,0 +1,28 @@
+name: Verify and Build Docs
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Install oj-verify
+        run: cargo install --git https://github.com/online-judge-tools/verification-helper.git oj-verify
+
+      - name: Run verify
+        run: oj-verify run
+
+      - name: Build docs
+        run: oj-verify docs

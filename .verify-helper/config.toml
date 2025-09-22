@@ -1,12 +1,13 @@
-[config]
-repo_url = "https://github.com/Le-Leal/kyoproLibrary"
-html_out_dir = "docs"
-
 [[languages.cpp.environments]]
 CXX = "g++"
 CXXFLAGS = ["-std=c++17", "-O2", "-Wall", "-Wextra", "-g",
-            "-I", "library", "-I", "library/structure"]
+            "-I", "library", "-I", "library/structure","library/algorithm", "library/graph", "library/string", "library/mathtype","library/utility"]
             
 [repository]
 name = "kyoprolibrary"
 root = "."
+
+[config]
+repo_url = "https://github.com/Le-Leal/kyoproLibrary"
+title = "Kyopro Library Documentation"
+html_out_dir = "docs"

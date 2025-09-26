@@ -60,44 +60,24 @@ template<class T>void vvpr(vector<vector<T>> g) {
     }
 }
 //ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
-void greedysolve() {
-    //greedy;
-    set<vector<ll>> ans;
-    ll n; cin>>n;
-    vector<ll> a(n);
-    rep(i,n) cin>>a[i];
-    rep(l,n) {
-        srep(r,l,n-1) {
-            vl b=a;
-            srep(i,l,r) {
-                b[i]=b[l];
-            }
-            ans.insert(b);
-        }
-    }
-    cout<<ans.size()<<nl;
-}
-
 int main() {
-    ll n; cin>>n;
-    vl a(n);
-    rep(i,n) {
-        cin>>a[i];
-    }
-    vector<pair<ll,ll>> vp;
-    ll ans=0;
-    vl ct(n+1);
-    irep(i,n-1,0) {
-        if(i==0) {
-            ans+=(n-1-i)-ct[a[i]];
-            ct[a[i]]++;
+    ll n,x,q; cin>>n>>x>>q;
+    ld ans=0.0l;
+    rep(i,q) {
+        ll m; cin>>m;
+        map<ll,ll> mp;
+        rep(j,m) {
+            ll f; cin>>f;
+            mp[f]++;
         }
-        else {
-            if(a[i]!=a[i-1]) {
-                ans+=(n-1-i)-ct[a[i]];
-            }
-            ct[a[i]]++;
+        bool twoact=false;
+        bool uminekoact=false;
+        for(auto[key,val]:mp) {
+            if(key==x) uminekoact=true;
+            if(val>=2) twoact=true;
         }
+        if(uminekoact) ans+=1.0l;
+        else if(twoact) ans+=0.5l;
     }
-    cout<<ans+1<<nl;
+    cout<<ans<<nl;
 }

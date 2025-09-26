@@ -1,0 +1,9 @@
+{
+  "terminal.integrated.defaultProfile.linux": "bash",
+
+  "C_Cpp.default.cppStandard": "c++23",
+  "C_Cpp.default.intelliSenseMode": "gcc-x64",
+  "C_Cpp.default.compilerPath": "/usr/bin/g++",
+
+  "editor.formatOnSave": true
+}

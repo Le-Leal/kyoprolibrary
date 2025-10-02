@@ -79,25 +79,5 @@ void greedysolve() {
 }
 
 int main() {
-    ll n; cin>>n;
-    vl a(n);
-    rep(i,n) {
-        cin>>a[i];
-    }
-    vector<pair<ll,ll>> vp;
-    ll ans=0;
-    vl ct(n+1);
-    irep(i,n-1,0) {
-        if(i==0) {
-            ans+=(n-1-i)-ct[a[i]];
-            ct[a[i]]++;
-        }
-        else {
-            if(a[i]!=a[i-1]) {
-                ans+=(n-1-i)-ct[a[i]];
-            }
-            ct[a[i]]++;
-        }
-    }
-    cout<<ans+1<<nl;
+    
 }

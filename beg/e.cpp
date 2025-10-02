@@ -81,27 +81,5 @@ ll modpow(ll fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
 }
 
 int main() {
-    ll t,m; cin>>t>>m;
-    vector<vl> binom(5005,vl(5005));
-    rep(i,5005) binom[i][0]=1;
-    rep(i,5005) binom[i][i]=1;
-    srep(i,1,5004) {
-        srep(j,1,5004) {
-            binom[i][j]=(binom[i-1][j]+binom[i-1][j-1])%m;
-        }
-    }
-    while(t--) {
-        ll n;
-        cin>>n;
-        vector<ll> c(n);
-        rep(i,n) cin>>c[i];
-        ll sum=0;
-        ll ans=1;
-        rep(i,n) {
-            sum+=c[i];
-            ans*=binom[sum][c[i]];
-            ans%=m;
-        }
-        cout<<ans<<nl;
-    }
+    
 }

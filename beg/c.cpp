@@ -60,48 +60,6 @@ template<class T>void vvpr(vector<vector<T>> g) {
     }
 }
 //ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
-void greedysolve() {
-    //greedy;
-    set<vector<ll>> ans;
-    ll n; cin>>n;
-    vector<ll> a(n);
-    rep(i,n) cin>>a[i];
-    rep(l,n) {
-        srep(r,l,n-1) {
-            vl b=a;
-            srep(i,l,r) {
-                b[i]=b[l];
-            }
-            ans.insert(b);
-        }
-    }
-    cout<<ans.size()<<nl;
-}
-
 int main() {
-    ll n,q; cin>>n>>q;
-    vl a(n);
-    rep(i,n) cin>>a[i];
-    ll rotated=0;
-    vl pref(n+1);
-    pref[0]=0;
-    srep(i,1,n) pref[i]=pref[i-1]+a[i-1];
-    rep(i,q) {
-        ll ty; cin>>ty;
-        if(ty==1) {
-            ll c; cin>>c;
-            rotated+=c;
-        }
-        if(ty==2) {
-            ll l,r; cin>>l>>r;
-            ll lef=l+rotated,rig=r+rotated;
-            lef%=n;
-            rig%=n;
-            if(lef==0) lef+=n;
-            ll res=0;
-            res+=pref[rig]-pref[lef-1];
-            if(lef>rig) res+=pref[n];
-            cout<<res<<nl;
-        }
-    }
+    
 }

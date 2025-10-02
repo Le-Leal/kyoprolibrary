@@ -79,27 +79,5 @@ void greedysolve() {
 }
 
 int main() {
-    ll n; cin>>n;
-    vl a(n);
-    rep(i,n) cin>>a[i];
-    vl ct(n+1);
-    rep(i,n) if(a[i]!=-1) ct[a[i]]++;
-    srep(i,1,n) {
-        if(ct[i]>=2) {
-            no();
-            return 0;
-        }
-    }
-    yes();
-    set<ll> s;
-    srep(i,1,n) s.insert(i);
-    rep(i,n) if(a[i]!=-1) s.erase(a[i]);
-    vl unins;
-    rep(i,n) if(a[i]==-1) unins.pb(i);
-    vl ans=a;
-    for(auto id:unins) {
-        ans[id]=*(s.begin());
-        s.erase(s.begin());
-    }
-    vout(ans);
+    
 }

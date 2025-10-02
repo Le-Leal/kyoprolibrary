@@ -50,7 +50,7 @@ ll safemod(ll num,ll rule) {
 }
 
 ll sum(vector<ll> &a) {
-    return accumulate(all(a),0);
+    return accumulate(all(a),0ll);
 }
 template<class T>void vvpr(vector<vector<T>> g) {
     rep(i,g.size()) {
@@ -59,45 +59,49 @@ template<class T>void vvpr(vector<vector<T>> g) {
         }
     }
 }
-//ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
-void greedysolve() {
-    //greedy;
-    set<vector<ll>> ans;
-    ll n; cin>>n;
-    vector<ll> a(n);
-    rep(i,n) cin>>a[i];
-    rep(l,n) {
-        srep(r,l,n-1) {
-            vl b=a;
-            srep(i,l,r) {
-                b[i]=b[l];
-            }
-            ans.insert(b);
+
+
+ll m;
+ll modpow(ll fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
+    ll ret=1;
+    if (mode) {
+        while (po>0) {
+            if (po&1) ret=(ret*fl)%m;
+            fl=(fl*fl)%m;
+            po>>=1;
+        }
+    } else {
+        while (po>0) {
+            if(po&1) ret*=fl;
+            fl*=fl;
+            po>>=1;
         }
     }
-    cout<<ans.size()<<nl;
+    return ret;
 }
 
 int main() {
-    ll n; cin>>n;
-    vl a(n);
-    rep(i,n) {
-        cin>>a[i];
-    }
-    vector<pair<ll,ll>> vp;
-    ll ans=0;
-    vl ct(n+1);
-    irep(i,n-1,0) {
-        if(i==0) {
-            ans+=(n-1-i)-ct[a[i]];
-            ct[a[i]]++;
-        }
-        else {
-            if(a[i]!=a[i-1]) {
-                ans+=(n-1-i)-ct[a[i]];
-            }
-            ct[a[i]]++;
+    ll t,m; cin>>t>>m;
+    vector<vl> binom(5005,vl(5005));
+    rep(i,5005) binom[i][0]=1;
+    rep(i,5005) binom[i][i]=1;
+    srep(i,1,5004) {
+        srep(j,1,5004) {
+            binom[i][j]=(binom[i-1][j]+binom[i-1][j-1])%m;
         }
     }
-    cout<<ans+1<<nl;
+    while(t--) {
+        ll n;
+        cin>>n;
+        vector<ll> c(n);
+        rep(i,n) cin>>c[i];
+        ll sum=0;
+        ll ans=1;
+        rep(i,n) {
+            sum+=c[i];
+            ans*=binom[sum][c[i]];
+            ans%=m;
+        }
+        cout<<ans<<nl;
+    }
 }

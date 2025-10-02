@@ -50,7 +50,7 @@ ll safemod(ll num,ll rule) {
 }
 
 ll sum(vector<ll> &a) {
-    return accumulate(all(a),0);
+    return accumulate(all(a),0ll);
 }
 template<class T>void vvpr(vector<vector<T>> g) {
     rep(i,g.size()) {
@@ -61,23 +61,12 @@ template<class T>void vvpr(vector<vector<T>> g) {
 }
 //ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
 int main() {
-    ll n,x,q; cin>>n>>x>>q;
-    ld ans=0.0l;
-    rep(i,q) {
-        ll m; cin>>m;
-        map<ll,ll> mp;
-        rep(j,m) {
-            ll f; cin>>f;
-            mp[f]++;
-        }
-        bool twoact=false;
-        bool uminekoact=false;
-        for(auto[key,val]:mp) {
-            if(key==x) uminekoact=true;
-            if(val>=2) twoact=true;
-        }
-        if(uminekoact) ans+=1.0l;
-        else if(twoact) ans+=0.5l;
+    int n; cin>>n;
+    ll ans=0;
+    srep(i,1,n) {
+        ll p=i*i*i;
+        if(i%2==1) p*=-1;
+        ans+=p;
     }
     cout<<ans<<nl;
 }

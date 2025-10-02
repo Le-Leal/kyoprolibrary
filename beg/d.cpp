@@ -78,26 +78,58 @@ void greedysolve() {
     cout<<ans.size()<<nl;
 }
 
+struct str {
+    ll i,j;
+    ll turn;
+};
 int main() {
-    ll n; cin>>n;
-    vl a(n);
-    rep(i,n) {
-        cin>>a[i];
-    }
-    vector<pair<ll,ll>> vp;
-    ll ans=0;
-    vl ct(n+1);
-    irep(i,n-1,0) {
-        if(i==0) {
-            ans+=(n-1-i)-ct[a[i]];
-            ct[a[i]]++;
+    ll h,w; cin>>h>>w;
+    vector<string> g(h);
+    rep(i,h) cin>>g[i];
+    queue<str> que;
+    rep(i,h) rep(j,w) {
+        ll r=0;
+        rep(k,4) {
+            ll nx=i+dx[k],ny=j+dy[k];
+            if(isin(nx,ny,h,w) && g[nx][ny]=='#') r++;
         }
-        else {
-            if(a[i]!=a[i-1]) {
-                ans+=(n-1-i)-ct[a[i]];
+        if(g[i][j]=='.' && r==1) que.push({i,j,0});
+    }
+    vector<vl> faced(h,vl(w));
+    rep(i,h) rep(j,w) {
+        ll r=0;
+        if(g[i][j]=='#') {
+            faced[i][j]=100;
+            continue;
+        }
+        rep(k,4) {
+            ll nx=i+dx[k],ny=j+dy[k];
+            if(isin(nx,ny,h,w) && g[nx][ny]=='#') r++;
+        }
+        faced[i][j]=r;
+    }
+    vector<vl> newg=faced;
+    ll prt;
+    while(!que.empty()) {
+        auto [i,j,turn]=que.front();
+        que.pop();
+        if(prt!=turn) {
+            faced=newg;
+        }
+        if(faced[i][j]>=2) continue;
+        prt=turn;
+        g[i][j]='#';
+        rep(k,4) {
+            ll nx=i+dx[k],ny=j+dy[k];
+            if(!isin(nx,ny,h,w)) continue;
+            newg[nx][ny]++;
+            if(newg[nx][ny]==1) {
+                que.push({nx,ny,turn+1});
             }
-            ct[a[i]]++;
         }
     }
-    cout<<ans+1<<nl;
+    ll ans=0;
+    rep(i,h) rep(j,w) ans+=(g[i][j]=='#');
+    //rep(i,h) cout<<g[i]<<nl;
+    cout<<ans<<nl;
 }

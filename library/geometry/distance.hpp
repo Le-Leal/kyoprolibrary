@@ -34,8 +34,8 @@ bool onseg(ld fx,ld fy,ld x1,ld y1,ld x2,ld y2){ //線分(x1,y1)~(x2,y2)に(fx,f
     return t>=-epsil && t<=1.0l+epsil;
 };
 
-ld point_seg_dist(ld a,ld b,ld c,ld x1,ld y1,ld x2,ld y2,ld px,ld py){ // ax+by+c=0 ([x1,x2] and [y1,y2])と(px,py)の最小距離 O(1),誤差あぶなめ
-    assert(fabsl(a*x1+b*y1+c)<=epsil && fabsl(a*x2+b*y2+c)<=epsil); //あってる？
+ld point_seg_dist(ld x1,ld y1,ld x2,ld y2,ld px,ld py){ // ax+by+c=0 ([x1,x2] and [y1,y2])と(px,py)の最小距離 O(1),誤差あぶなめ
+    ld a=y2-y1,b=x1-x2,c=-(a*x1+b*y1);
     if(fabsl(a)<=epsil && fabsl(b)<=epsil){
         ld r=dist(px,py,x1,y1);
         r=min(r,dist(px,py,x2,y2));
@@ -50,7 +50,8 @@ ld point_seg_dist(ld a,ld b,ld c,ld x1,ld y1,ld x2,ld y2,ld px,ld py){ // ax+by+
 }
 
 
-ld point_seg_dist_ternarysearch(ld a,ld b,ld c,ld x1,ld y1,ld x2,ld y2,ld px,ld py){ //上と同じ。誤差少なめだけど100iterationくらいする
+ld point_seg_dist_ternarysearch(ld x1,ld y1,ld x2,ld y2,ld px,ld py){ //上と同じ。誤差少なめだけど100iterationくらいする
+    ld a=y2-y1,b=x1-x2,c=-(a*x1+b*y1);
     assert(fabsl(a*x1+b*y1+c)<=epsil && fabsl(a*x2+b*y2+c)<=epsil);
     ld l=0.0l,r=1.0l;
     rep(iter,100) {

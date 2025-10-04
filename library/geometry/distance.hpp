@@ -62,7 +62,8 @@ ld point_seg_dist_ternarysearch(ld a,ld b,ld c,ld x1,ld y1,ld x2,ld y2,ld px,ld 
         ld y2t=y1+(y2-y1)*m2;
         ld d1=dist(px,py,x1t,y1t);
         ld d2=dist(px,py,x2t,y2t);
-        if(d1<d2) r=m2; else l=m1;
+        if(d1<d2) r=m2;
+        else l=m1;
     }
     ld t=(l+r)/2.0l;
     ld fx=x1+(x2-x1)*t;

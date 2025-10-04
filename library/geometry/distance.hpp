@@ -48,7 +48,9 @@ ld point_seg_dist(ld a,ld b,ld c,ld x1,ld y1,ld x2,ld y2,ld px,ld py){ // ax+by+
     r=min(r,dist(px,py,x2,y2));
     return r;
 }
-ld point_seg_dist_trinarysearch(ld a,ld b,ld c,ld x1,ld y1,ld x2,ld y2,ld px,ld py){
+
+
+ld point_seg_dist_ternarysearch(ld a,ld b,ld c,ld x1,ld y1,ld x2,ld y2,ld px,ld py){ //上と同じ。誤差少なめだけど100iterationくらいする
     assert(fabsl(a*x1+b*y1+c)<=epsil && fabsl(a*x2+b*y2+c)<=epsil);
     ld l=0.0l,r=1.0l;
     rep(iter,100) {

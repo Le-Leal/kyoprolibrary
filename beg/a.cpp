@@ -61,5 +61,10 @@ template<class T>void vvpr(vector<vector<T>> g) {
 }
 //ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
 int main() {
-    
+    map<string,int> mp;
+    mp["Ocelot"]=0;
+    mp["Serval"]=1;
+    mp["Lynx"]=2;
+    string x,y; cin>>x>>y;
+    yn(mp[x]>=mp[y]);
 }

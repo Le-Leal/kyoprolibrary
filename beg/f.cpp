@@ -60,23 +60,7 @@ template<class T>void vvpr(vector<vector<T>> g) {
     }
 }
 //ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
-void greedysolve() {
-    //greedy;
-    set<vector<ll>> ans;
-    ll n; cin>>n;
-    vector<ll> a(n);
-    rep(i,n) cin>>a[i];
-    rep(l,n) {
-        srep(r,l,n-1) {
-            vl b=a;
-            srep(i,l,r) {
-                b[i]=b[l];
-            }
-            ans.insert(b);
-        }
-    }
-    cout<<ans.size()<<nl;
-}
+
 
 int main() {
     

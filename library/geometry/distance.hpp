@@ -3,7 +3,7 @@ using namespace std;
 using ll = long long;
 using ld = long double;
 #define rep(i,n) for(ll i=0;i<n;i++)
-#define epsil 1e-12
+#define EPSIL 1e-12
 #define Winf 5e12
 
 ld dist(ld x,ld y,ld x1,ld y1){
@@ -13,13 +13,13 @@ ld dist(ld x,ld y,ld x1,ld y1){
 
 ld line_point_dist(ld a,ld b,ld c,ld px,ld py){
     ld f=a*a+b*b;
-    if(f<=epsil) return Winf;
+    if(f<=EPSIL) return Winf;
     return fabsl(a*px+b*py+c)/sqrtl(f);
 }
 
 bool foot_from_point(ld a,ld b,ld c,ld px,ld py,ld &fx,ld &fy){ //ax+by+c=0に(px,py)から垂線を下した時の足が入る
     ld f=a*a+b*b;
-    if(f<=epsil) return false;
+    if(f<=EPSIL) return false;
     fx=px-a*(a*px+b*py+c)/f;
     fy=py-b*(a*px+b*py+c)/f;
     return true;
@@ -29,14 +29,14 @@ bool onseg(ld fx,ld fy,ld x1,ld y1,ld x2,ld y2){ //線分(x1,y1)~(x2,y2)に(fx,f
     ld dx=x2-x1;
     ld dy=y2-y1;
     ld d2=dx*dx+dy*dy;
-    if(d2<=epsil) return false;
+    if(d2<=EPSIL) return false;
     ld t=((fx-x1)*dx+(fy-y1)*dy)/d2;
-    return t>=-epsil && t<=1.0l+epsil;
+    return t>=-EPSIL && t<=1.0l+EPSIL;
 };
 
-ld point_seg_dist(ld x1,ld y1,ld x2,ld y2,ld px,ld py){ // ax+by+c=0 ([x1,x2] and [y1,y2])と(px,py)の最小距離 O(1),誤差あぶなめ
+ld point_seg_dist(ld x1,ld y1,ld x2,ld y2,ld px,ld py){
     ld a=y2-y1,b=x1-x2,c=-(a*x1+b*y1);
-    if(fabsl(a)<=epsil && fabsl(b)<=epsil){
+    if(fabsl(a)<=EPSIL && fabsl(b)<=EPSIL){
         ld r=dist(px,py,x1,y1);
         r=min(r,dist(px,py,x2,y2));
         return r;
@@ -49,25 +49,21 @@ ld point_seg_dist(ld x1,ld y1,ld x2,ld y2,ld px,ld py){ // ax+by+c=0 ([x1,x2] an
     return r;
 }
 
-
-ld point_seg_dist_ternarysearch(ld x1,ld y1,ld x2,ld y2,ld px,ld py){ //上と同じ。誤差少なめだけど100iterationくらいする
-    ld a=y2-y1,b=x1-x2,c=-(a*x1+b*y1);
-    assert(fabsl(a*x1+b*y1+c)<=epsil && fabsl(a*x2+b*y2+c)<=epsil);
+ld point_seg_dist_ternarysearch(ld x1,ld y1,ld x2,ld y2,ld px,ld py){
+    ld dx=x2-x1,dy=y2-y1;
+    ld segd2=dx*dx+dy*dy;
+    if(segd2<=EPSIL) return dist(px,py,x1,y1);
     ld l=0.0l,r=1.0l;
-    rep(iter,100) {
+    rep(iter,100){
         ld m1=l+(r-l)/3.0l;
         ld m2=r-(r-l)/3.0l;
-        ld x1t=x1+(x2-x1)*m1;
-        ld y1t=y1+(y2-y1)*m1;
-        ld x2t=x1+(x2-x1)*m2;
-        ld y2t=y1+(y2-y1)*m2;
-        ld d1=dist(px,py,x1t,y1t);
-        ld d2=dist(px,py,x2t,y2t);
-        if(d1<d2) r=m2;
-        else l=m1;
+        ld x1t=x1+dx*m1,y1t=y1+dy*m1;
+        ld x2t=x1+dx*m2,y2t=y1+dy*m2;
+        ld dd1=(x1t-px)*(x1t-px)+(y1t-py)*(y1t-py);
+        ld dd2=(x2t-px)*(x2t-px)+(y2t-py)*(y2t-py);
+        if(dd1<dd2) r=m2; else l=m1;
     }
     ld t=(l+r)/2.0l;
-    ld fx=x1+(x2-x1)*t;
-    ld fy=y1+(y2-y1)*t;
-    return dist(px,py,fx,fy);
+    ld fx=x1+dx*t,fy=y1+dy*t;
+    return sqrtl((fx-px)*(fx-px)+(fy-py)*(fy-py));
 }

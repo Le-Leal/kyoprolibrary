@@ -59,15 +59,12 @@ template<class T>void vvpr(vector<vector<T>> g) {
         }
     }
 }
-
-
-ll m;
 ll modpow(ll fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
     ll ret=1;
     if (mode) {
         while (po>0) {
-            if (po&1) ret=(ret*fl)%m;
-            fl=(fl*fl)%m;
+            if (po&1) ret=(ret*fl)%mod;
+            fl=(fl*fl)%mod;
             po>>=1;
         }
     } else {
@@ -82,18 +79,8 @@ ll modpow(ll fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
 struct point {
     ld sx,sy,gx,gy,goaltime;
 };
-ld dist(ld x,ld y,ld x1,ld y1) {
-    ld p=(x1-x)*(x1-x)+(y1-y)*(y1-y);
-    return sqrtl(p);
-}
-
-ld line_point_dist(ld a,ld b,ld c) {
-    ld fracmom=sqrtl(a*a+b*b);
-    ld epsil=1e-12;
-    if(fracmom<=epsil) return Winf;
-    else return fabsl(c)/fracmom;
-}
-
+#include <geometry/distance.hpp>
+#include <atcoder/lazysegtree>
 int main() {
     ll tc; cin>>tc;
     vector<ld> anss(tc);
@@ -137,45 +124,8 @@ int main() {
         ld s2_endy=ao.gy-tx_rely;
         chmin(ans,dist(0,0,s2_endx,s2_endy));
         chmin(ans,dist(0,0,ao.gx,ao.gy));
-        ld la=(my-ao.sy);
-        ld lb=(ao.sx-mx);
-        ld lc=mx*ao.sy-my*ao.sx;
-        ld la2=(s2_endy-my);
-        ld lb2=(mx-s2_endx);
-        ld lc2=(s2_endx*my-s2_endy*mx);
         ld epsil=1e-12;
-        auto foot_from_origin=[&](ld a,ld b,ld c,ld &fx,ld &fy)->bool {
-            ld fracmom=a*a+b*b;
-            if (fracmom<=epsil) return false;
-            fx=-a*c/fracmom;
-            fy=-b*c/fracmom;
-            return true;
-        };
-        auto onseg=[&](ld fx,ld fy,ld x1,ld y1,ld x2,ld y2)->bool {
-            ld dx=x2-x1;
-            ld dy=y2-y1;
-            ld d2=dx*dx+dy*dy;
-            if (d2<=epsil) return false;
-            ld tproj=((fx-x1)*dx+(fy-y1)*dy)/d2;
-            return (tproj>=-epsil && tproj<=1.0l+epsil);
-        };
-        auto point_seg_dist=[&](ld a,ld b,ld c,ld x1,ld y1,ld x2,ld y2)->ld {
-            if (fabsl(a)<=epsil && fabsl(b)<=epsil) {
-                ld r=dist(0,0,x1,y1);
-                chmin(r,dist(0,0,x2,y2));
-                return r;
-            }
-            ld fx,fy;
-            if (foot_from_origin(a,b,c,fx,fy) && onseg(fx,fy,x1,y1,x2,y2)) {
-                return line_point_dist(a,b,c);
-            }
-            ld r=dist(0,0,x1,y1);
-            chmin(r,dist(0,0,x2,y2));
-            return r;
-        };
-
-        chmin(ans,point_seg_dist(la,lb,lc,ao.sx,ao.sy,mx,my));
-        chmin(ans,point_seg_dist(la2,lb2,lc2,mx,my,ao.gx,ao.gy));
+        
         anss[tt]=ans;
     }
     cout<<fixed<<setprecision(15);

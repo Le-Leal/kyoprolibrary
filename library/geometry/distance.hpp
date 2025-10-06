@@ -34,7 +34,7 @@ bool onseg(ld fx,ld fy,ld x1,ld y1,ld x2,ld y2){ //線分(x1,y1)~(x2,y2)に(fx,f
     return t>=-EPSIL && t<=1.0l+EPSIL;
 };
 
-ld point_seg_dist(ld x1,ld y1,ld x2,ld y2,ld px,ld py){
+ld point_seg_dist(ld x1,ld y1,ld x2,ld y2,ld px,ld py){ //線分(x1,y1)<->(x2,y2)と(px,py)の最短距離
     ld a=y2-y1,b=x1-x2,c=-(a*x1+b*y1);
     if(fabsl(a)<=EPSIL && fabsl(b)<=EPSIL){
         ld r=dist(px,py,x1,y1);

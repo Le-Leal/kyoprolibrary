@@ -62,43 +62,31 @@ template<class T>void vvpr(vector<vector<T>> g) {
 //ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp;
 
 int main() {
-    ll t; cin>>t;
-    vl ans(t);
-    rep(tt,t) {
-        ll n; cin>>n;
-        vl a(n);
-        rep(i,n) {
-            char c; cin>>c;
-            a[i]=c-'0';
+    ll h,w,k; cin>>h>>w>>k;
+    vector<vector<char>> g(h,vc(w));
+    rep(i,h) rep(j,w) cin>>g[i][j];
+    ll ans=0;
+    vector<vector<bool>> used(h,vector<bool>(w,false));
+    function<void(ll,ll,ll)> dfs=[&](ll turn,ll i,ll j)->void {
+        if(turn==k) {
+            ans++;
+            return;
         }
-        ll zc=0,oc=0;
-        rep(i,n) {
-            if(a[i]==0) zc++;
-            else oc++;
+        rep(q,4) {
+            ll nx=i+dx[q],ny=j+dy[q];
+            if(!isin(nx,ny,h,w)) continue;
+            if(used[nx][ny]) continue;
+            if(g[nx][ny]=='#') continue;
+            used[nx][ny]=true;
+            dfs(turn+1,nx,ny);
+            used[nx][ny]=false;
         }
-        if(zc==n || oc==0) {
-            ans[tt]=0;
-            continue;
-        }
-        function<ll(void)> fill=[&](void)->ll { //0にそろえる
-            ll maxzeros=0;
-            ll cur=0;
-            rep(i,n) {
-                if(a[i]==0) cur++;
-                else {
-                    chmax(maxzeros,cur);
-                    cur=0;
-                }
-            }
-            chmax(maxzeros,cur);
-            return (zc-maxzeros)*2+oc;
-        };
-        ll anss=1e9;
-        chmin(anss,fill());
-        rep(i,n) a[i]=1-a[i];
-        swap(zc,oc);
-        chmin(anss,fill());
-        ans[tt]=anss;
+    };
+    rep(ii,h) rep(jj,w) {
+        if(g[ii][jj]=='#') continue;
+        used[ii][jj]=1;
+        dfs(0,ii,jj);
+        used[ii][jj]=0;
     }
-    rep(i,t) cout<<ans[i]<<nl;
+    cout<<ans<<nl;
 }

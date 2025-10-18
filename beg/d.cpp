@@ -50,7 +50,7 @@ ll safemod(ll num,ll rule) {
 }
 
 ll sum(vector<ll> &a) {
-    return accumulate(all(a),0);
+    return accumulate(all(a),0ll);
 }
 template<class T>void vvpr(vector<vector<T>> g) {
     rep(i,g.size()) {
@@ -62,31 +62,5 @@ template<class T>void vvpr(vector<vector<T>> g) {
 //ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp;
 
 int main() {
-    ll h,w,k; cin>>h>>w>>k;
-    vector<vector<char>> g(h,vc(w));
-    rep(i,h) rep(j,w) cin>>g[i][j];
-    ll ans=0;
-    vector<vector<bool>> used(h,vector<bool>(w,false));
-    function<void(ll,ll,ll)> dfs=[&](ll turn,ll i,ll j)->void {
-        if(turn==k) {
-            ans++;
-            return;
-        }
-        rep(q,4) {
-            ll nx=i+dx[q],ny=j+dy[q];
-            if(!isin(nx,ny,h,w)) continue;
-            if(used[nx][ny]) continue;
-            if(g[nx][ny]=='#') continue;
-            used[nx][ny]=true;
-            dfs(turn+1,nx,ny);
-            used[nx][ny]=false;
-        }
-    };
-    rep(ii,h) rep(jj,w) {
-        if(g[ii][jj]=='#') continue;
-        used[ii][jj]=1;
-        dfs(0,ii,jj);
-        used[ii][jj]=0;
-    }
-    cout<<ans<<nl;
+    
 }

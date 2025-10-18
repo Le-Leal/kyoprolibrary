@@ -50,7 +50,7 @@ ll safemod(ll num,ll rule) {
 }
 
 ll sum(vector<ll> &a) {
-    return accumulate(all(a),0);
+    return accumulate(all(a),0ll);
 }
 template<class T>void vvpr(vector<vector<T>> g) {
     rep(i,g.size()) {

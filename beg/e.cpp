@@ -59,75 +59,9 @@ template<class T>void vvpr(vector<vector<T>> g) {
         }
     }
 }
-ll modpow(ll fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
-    ll ret=1;
-    if (mode) {
-        while (po>0) {
-            if (po&1) ret=(ret*fl)%mod;
-            fl=(fl*fl)%mod;
-            po>>=1;
-        }
-    } else {
-        while (po>0) {
-            if(po&1) ret*=fl;
-            fl*=fl;
-            po>>=1;
-        }
-    }
-    return ret;
-}
-struct point {
-    ld sx,sy,gx,gy,goaltime;
-};
-#include <geometry/distance.hpp>
-#include <atcoder/lazysegtree>
+//ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
+
+
 int main() {
-    ll tc; cin>>tc;
-    vector<ld> anss(tc);
-    point ta,ao;
-    rep(tt,tc) {
-        rep(i,2) {
-            ld sx,sy,gx,gy;
-            cin>>sx>>sy>>gx>>gy;
-            if(i==0) ta={sx,sy,gx,gy,0};
-            else ao={sx,sy,gx,gy,0};
-        }
-        ta.goaltime=(ta.gy-ta.sy)*(ta.gy-ta.sy)+(ta.gx-ta.sx)*(ta.gx-ta.sx);
-        ao.goaltime=(ao.gy-ao.sy)*(ao.gy-ao.sy)+(ao.gx-ao.sx)*(ao.gx-ao.sx);
-        ta.goaltime=sqrtl(ta.goaltime);
-        ao.goaltime=sqrtl(ao.goaltime);
-        if(ta.goaltime>ao.goaltime) swap(ta,ao); //aoがうごいてtaはとまる
-        ld ans=Winf;
-        ld mx,my;
-        ld vtx=0,vty=0,vax=0,vay=0;
-        const ld Meps=1e-18;
-        if (fabsl(ta.goaltime)>Meps) {
-            vtx=(ta.gx-ta.sx)/ta.goaltime;
-            vty=(ta.gy-ta.sy)/ta.goaltime;
-        }
-        if (fabsl(ao.goaltime)>Meps) {
-            vax=(ao.gx-ao.sx)/ao.goaltime;
-            vay=(ao.gy-ao.sy)/ao.goaltime;
-        }
-        ld tx_relx=ta.gx-ta.sx;
-        ld tx_rely=ta.gy-ta.sy;
-        ao.sx-=ta.sx;
-        ao.sy-=ta.sy;
-        ao.gx-=ta.sx;
-        ao.gy-=ta.sy;
-        ta.sx=ta.sy=ta.gx=ta.gy=0;
-        mx=ao.sx+ta.goaltime*(vax-vtx);
-        my=ao.sy+ta.goaltime*(vay-vty);
-        chmin(ans,dist(0,0,ao.sx,ao.sy));
-        chmin(ans,dist(0,0,mx,my));
-        ld s2_endx=ao.gx-tx_relx;
-        ld s2_endy=ao.gy-tx_rely;
-        chmin(ans,dist(0,0,s2_endx,s2_endy));
-        chmin(ans,dist(0,0,ao.gx,ao.gy));
-        ld epsil=1e-12;
-        
-        anss[tt]=ans;
-    }
-    cout<<fixed<<setprecision(15);
-    rep(i,tc) cout<<anss[i]<<nl;
+    
 }

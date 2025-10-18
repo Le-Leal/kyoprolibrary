@@ -50,7 +50,7 @@ ll safemod(ll num,ll rule) {
 }
 
 ll sum(vector<ll> &a) {
-    return accumulate(all(a),0);
+    return accumulate(all(a),0ll);
 }
 template<class T>void vvpr(vector<vector<T>> g) {
     rep(i,g.size()) {
@@ -60,10 +60,12 @@ template<class T>void vvpr(vector<vector<T>> g) {
     }
 }
 //ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
+
+int vec_contain(vector<ll> &a,ll val) {
+    rep(i,a.size()) if(a[i]==val) return 1;
+    return 0;
+}
+
 int main() {
-    ll n,q; cin>>n>>q;
-    ll maxupdate=-1;
-    rep(i,n) {
-        ll x,y; cin>>x>>y;
-    }
+    
 }

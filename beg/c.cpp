@@ -67,5 +67,30 @@ int vec_contain(vector<ll> &a,ll val) {
 }
 
 int main() {
-    
+    vector<ll> diags;
+    string str;
+    ll q; cin>>q;
+    ll minusc=0;
+    rep(i,q) {
+        ll ty; cin>>ty;
+        if(ty==1) {
+            char c; cin>>c;
+            str.pb(c);
+            ll add;
+            if(c=='(') add=1; else add=-1;
+            if(diags.size()==0) diags.pb(add);
+            else diags.pb(diags[diags.size()-1]+add);
+            if(diags.back()<0) minusc++;
+        }
+        else {
+            str.pop_back();
+            if(diags[diags.size()-1]<0) minusc--;
+            diags.pop_back();
+        }
+        bool b=false;
+        if(diags.size()==0) b=true;
+        else if(diags.back()==0) b=true;
+        yn(b && minusc==0);
+        //vout(diags) cout<<str<<" "<<minusc<<nl;
+    }
 }

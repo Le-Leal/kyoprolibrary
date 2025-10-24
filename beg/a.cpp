@@ -61,5 +61,11 @@ template<class T>void vvpr(vector<vector<T>> g) {
 }
 //ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
 int main() {
-    
+    ll s,a,b,x; cin>>s>>a>>b>>x;
+    ll ans=0;
+    ll loop=x/(a+b);
+    ll le=x%(a+b);
+    ans=s*a*loop;
+    ans+=min(a,le)*s;
+    cout<<ans<<nl;
 }

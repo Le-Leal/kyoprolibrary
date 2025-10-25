@@ -78,7 +78,7 @@ ll ketasuu(ll n) {
     }
 }
 
-lint modpow(lint fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
+ll modpow(ll fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
     lint ret=1;
     if (mode) {
         while (po>0) {
@@ -95,40 +95,53 @@ lint modpow(lint fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
     }
     return ret;
 }
+ll pub(vector<pair<ll,ll>> &v, ll val) { //valよりうえ最小のとこにある団地(up_bnd)
+    ll lef=0;
+    ll rig=v.size();
+    while(rig-lef>1) {
+        ll mid=(rig-lef)/2+lef;
+        if(v[mid].second>val) rig=mid;
+        else lef=mid;
+    }
+    return rig;
+}
 
 int main() {
-    ll t; cin>>t;
-    vl anss(t);
-    rep(tt,t) {
-        ll cc,dd; cin>>cc>>dd;
-        lint c=cc,d=dd;
-        ll minn=ketasuu(c+1);
-        ll maxn=ketasuu(c+d);
-        ll ans=0;
-        for(ll n=minn;n<=maxn;n++) {
-            lint lefk,rigk;
-            lefk=modpow(10,n,0)*c+c+1;
-            rigk=d+modpow(10,n,0)*c+c;
-            chmax(lefk,modpow(10,n,0)*c+modpow(10,n-1,0));
-            chmin(rigk,modpow(10,n,0)*c+modpow(10,n,0)-1);
-            lint validlef,validrig;
-            lint lef=-1,rig=(lint)2000000000;
-            while(rig-lef>1) {
-                lint mid=(lef+rig)/2;
-                if(lefk<=mid*mid) rig=mid;
-                else lef=mid;
-            }
-            validlef=rig;
-            lef=-1,rig=(lint)2000000000;
-            while(rig-lef>1) {
-                lint mid=(lef+rig)/2;
-                if(mid*mid<=rigk) lef=mid;
-                else rig=mid;
-            }
-            validrig=lef;
-            if(validlef<=validrig) ans+=(validrig-validlef+1);
-        }
-        anss[tt]=ans;
+    ll n,m,c; cin>>n>>m>>c;
+    vl a(n);
+    rep(i,n) cin>>a[i];
+    sort(all(a));
+    vector<pair<ll,ll>> pref; //{i番目の団地までにいくついる？,i番目の団地の座標}円環な感じ
+    pref.pb({0,0});
+    map<ll,ll> mp;
+    rep(i,n) mp[a[i]]++;
+    ll id=1;
+    for(auto[k,v]:mp) {
+        pref.pb({pref[id-1].first+v,k});
+        id++;
     }
-    rep(tt,t) cout<<anss[tt]<<nl;
+    ll psz=pref.size();
+    srep(i,1,psz) pref.pb({pref[i].first+n,pref[i].second+m});
+    psz=pref.size();
+    ll ans=0;
+    uniq(a);
+    a.pb(a[0]+m);
+    //vout(a);
+    //rep(i,pref.size()) cout<<i<<" "<<pref[i].first<<" "<<pref[i].second<<nl;
+    rep(i,a.size()-1) {
+        ll l=a[i];
+        ll r=a[i+1];
+        ll stt=pub(pref,l);
+        ll lef=stt-1,rig=pref.size();
+        //cout<<stt<<nl;
+        while(rig-lef>1) {
+            ll mid=(lef+rig)/2;
+            if(pref[mid].first-pref[stt-1].first>=c) rig=mid;
+            else lef=mid;
+        }
+        ans+=(r-l)*(pref[rig].first-pref[stt-1].first);
+        //cout<<"Sub:"<<(r-l)*(pref[rig].first-pref[stt-1].first)<<nl;
+    }
+    cout<<ans<<nl;
+
 }

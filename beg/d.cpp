@@ -61,23 +61,6 @@ template<class T>void vvpr(vector<vector<T>> g) {
     }
 }
 //ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp;
-bool fastsquare(ll n) {
-    ll rt=ll(sqrtl(n));
-    for(ll r=rt-5;r<=rt+5;r++) {
-        if(r*r==n) return true;
-    }
-    return false;
-}
-
-ll ketasuu(ll n) {
-    ll res=0;
-    while(true) {
-        if(0<=n && n<=9) return res+1;
-        n/=10;
-        res++;
-    }
-}
-
 ll modpow(ll fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
     lint ret=1;
     if (mode) {
@@ -95,53 +78,7 @@ ll modpow(ll fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
     }
     return ret;
 }
-ll pub(vector<pair<ll,ll>> &v, ll val) { //valよりうえ最小のとこにある団地(up_bnd)
-    ll lef=0;
-    ll rig=v.size();
-    while(rig-lef>1) {
-        ll mid=(rig-lef)/2+lef;
-        if(v[mid].second>val) rig=mid;
-        else lef=mid;
-    }
-    return rig;
-}
 
 int main() {
-    ll n,m,c; cin>>n>>m>>c;
-    vl a(n);
-    rep(i,n) cin>>a[i];
-    sort(all(a));
-    vector<pair<ll,ll>> pref; //{i番目の団地までにいくついる？,i番目の団地の座標}円環な感じ
-    pref.pb({0,0});
-    map<ll,ll> mp;
-    rep(i,n) mp[a[i]]++;
-    ll id=1;
-    for(auto[k,v]:mp) {
-        pref.pb({pref[id-1].first+v,k});
-        id++;
-    }
-    ll psz=pref.size();
-    srep(i,1,psz) pref.pb({pref[i].first+n,pref[i].second+m});
-    psz=pref.size();
-    ll ans=0;
-    uniq(a);
-    a.pb(a[0]+m);
-    //vout(a);
-    //rep(i,pref.size()) cout<<i<<" "<<pref[i].first<<" "<<pref[i].second<<nl;
-    rep(i,a.size()-1) {
-        ll l=a[i];
-        ll r=a[i+1];
-        ll stt=pub(pref,l);
-        ll lef=stt-1,rig=pref.size();
-        //cout<<stt<<nl;
-        while(rig-lef>1) {
-            ll mid=(lef+rig)/2;
-            if(pref[mid].first-pref[stt-1].first>=c) rig=mid;
-            else lef=mid;
-        }
-        ans+=(r-l)*(pref[rig].first-pref[stt-1].first);
-        //cout<<"Sub:"<<(r-l)*(pref[rig].first-pref[stt-1].first)<<nl;
-    }
-    cout<<ans<<nl;
-
+    
 }

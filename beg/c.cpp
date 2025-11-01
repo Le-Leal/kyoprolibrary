@@ -66,18 +66,7 @@ int vec_contain(vector<ll> &a,ll val) {
     return 0;
 }
 
-ll binom2(ll n) {
-    return n*(n-1)/2;
-}
+
 int main() {
-    ll n; cin>>n;
-    vl a(n);
-    rep(i,n) cin>>a[i];
-    vl count(n);
-    rep(i,n) count[a[i]-1]++;
-    ll ans=0;
-    rep(i,n) {
-        ans+=binom2(count[i])*(n-count[i]);
-    }
-    cout<<ans<<nl;
+    
 }

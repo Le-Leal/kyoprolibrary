@@ -60,48 +60,7 @@ template<class T>void vvpr(vector<vector<T>> g) {
     }
 }
 //ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
-struct str {
-    ll origin;
-    ll idx;
-    ll dist;
-};
 
 int main() {
-    ll n,m; cin>>n>>m;
-    vector<vl> g(n);
-    rep(i,m) {
-        ll u,v; cin>>u>>v;
-        g[--u].pb(--v);
-        g[v].pb(u);
-    }
-    string s; cin>>s;
-    vector<vl> dist(n,vl(2,-1)); //Sからの最短距離と
-    vector<vl> midx(n,vl(2,-1)); //そうしてくれるS
-    queue<str> que;
-    rep(i,n) if(s[i]=='S') {
-        que.push({i,i,0});
-        dist[i][0]=0;
-        midx[i][0]=i;
-    }
-    while(!que.empty()) {
-        auto [origin,id,dis]=que.front();
-        que.pop();
-        ll size=g[id].size();
-        auto &v=g[id];
-        rep(t,size) {
-            if(midx[v[t]][0]==-1) {
-                dist[v[t]][0]=dis+1;
-                midx[v[t]][0]=origin;
-                que.push({origin,v[t],dis+1});
-            }
-            else if(midx[v[t]][0]!=origin && midx[v[t]][1]==-1) {
-                dist[v[t]][1]=dis+1;
-                midx[v[t]][1]=origin;
-                que.push({origin,v[t],dis+1});
-            }
-        }
-    }
-    vl res;
-    rep(i,n) if(s[i]=='D') res.pb(dist[i][0]+dist[i][1]);
-    for(ll e:res) cout<<e<<nl;
+    
 }

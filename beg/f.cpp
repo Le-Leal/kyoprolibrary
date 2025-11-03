@@ -59,16 +59,18 @@ template<class T>void vvpr(vector<vector<T>> g) {
         }
     }
 }
-//ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
-bool isnum(char c) {
-    return ('0'<=c && c<='9');
-}
-ll modpow(ll fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
-    ll ret=1;
+#include <atcoder/modint>
+using mint=atcoder::modint998244353;
+#include <atcoder/convolution>
+#define MOD 998244353
+template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
+    assert(po>=0);
+    T ret(1);
     if (mode) {
+        fl%=T(MOD);
         while (po>0) {
-            if (po&1) ret=(ret*fl)%mod;
-            fl=(fl*fl)%mod;
+            if (po&1) ret=(ret*fl)%T(MOD);
+            fl=(fl*fl)%T(MOD);
             po>>=1;
         }
     } else {
@@ -80,8 +82,6 @@ ll modpow(ll fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
     }
     return ret;
 }
-
-
 int main() {
     
 }

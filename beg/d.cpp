@@ -80,5 +80,42 @@ ll modpow(ll fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
 }
 
 int main() {
-    
+    ll n; cin>>n;
+    vl x(n+1,0);
+    srep(i,1,n) cin>>x[i];
+    set<pair<ll,ll>> cur;//za/idx
+    vector<ll> d(n+1,2000000000ll);
+    ll dsum=2000000000ll;
+    cur.insert({0,0});
+    vl ans(n+1);
+    srep(i,1,n) {
+        ll predi=INF;
+        auto it=cur.lower_bound(make_pair(x[i],-1ll));
+        if(it!=cur.end()) {
+            //cout<<"11reached here in i=="<<i<<nl;
+            auto it2=it;
+            if(d[it2->second]>llabs(x[it2->second]-x[i])) {
+                dsum-=(d[it2->second]-llabs(x[it2->second]-x[i]));
+                chmin(d[it2->second],llabs(x[it2->second]-x[i]));
+            }
+            chmin(predi,llabs(x[it2->second]-x[i]));
+        }
+        if(it!=cur.begin()) {
+            auto it2=it;
+            it2--;
+            //cout<<"22reached here in i=="<<i<<nl;
+            if(d[it2->second]>llabs(x[it2->second]-x[i])) {
+                dsum-=(d[it2->second]-abs(x[it2->second]-x[i]));
+                chmin(d[it2->second],llabs(x[it2->second]-x[i]));
+            }
+            chmin(predi,llabs(x[it2->second]-x[i]));
+
+        }
+        //assert(predi!=INF);
+        dsum+=predi;
+        d[i]=predi;
+        ans[i]=dsum;
+        cur.insert({x[i],i});
+    }
+    srep(i,1,n) cout<<ans[i]<<nl;
 }

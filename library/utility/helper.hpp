@@ -36,13 +36,14 @@ template <class T> void vecpr(T first,T last) {
 }
 
 
-ll modpow(ll fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
-    ll ret=1;
-    fl%=MOD;
+template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
+    assert(po>=0);
+    T ret(1);
     if (mode) {
+        fl%=T(MOD);
         while (po>0) {
-            if (po&1) ret=(ret*fl)%MOD;
-            fl=(fl*fl)%MOD;
+            if (po&1) ret=(ret*fl)%T(MOD);
+            fl=(fl*fl)%T(MOD);
             po>>=1;
         }
     } else {
@@ -124,3 +125,4 @@ ll divcount(ll n) {
         if(n%i==0) ans+=(i*i==n ? 1:2);
     }
     return ans;
+}

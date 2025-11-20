@@ -59,9 +59,6 @@ template<class T>void vvpr(vector<vector<T>> g) {
         }
     }
 }
-#include <atcoder/modint>
-using mint=atcoder::modint998244353;
-#include <atcoder/convolution>
 #define MOD 998244353
 template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
     assert(po>=0);
@@ -82,6 +79,70 @@ template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=mod�
     }
     return ret;
 }
+class factset {
+    public:
+        vl _fact;
+        vl _inv;
+        ll __n;
+        factset(ll n):_fact(n+1),_inv(n+1),__n(n) {
+            _fact[0]=1;
+            srep(i,1,__n) {
+                _fact[i]=_fact[i-1]*i;
+                _fact[i]%=MOD;
+            }
+            _inv[__n]=modpow(_fact[__n],MOD-2,1);
+            for(int i=__n-1;i>=0;i--) {
+                _inv[i]=_inv[i+1]*(i+1);
+                _inv[i]%=MOD;
+            }
+        }
+        ll fact(ll x) {
+            assert(0<=x && x<=__n);
+            return _fact[x];
+        }
+        ll inv(ll x) {
+            assert(0<=x && x<=__n);
+            return _inv[x];
+        }
+
+        ll comb(ll nn,ll k,ll mode) {
+            ll ans=1;
+            ans*=_fact[nn];
+            ans%=MOD;
+            ans*=_inv[nn-k];
+            ans%=MOD;
+            ans*=_inv[k];
+            return ans%MOD;
+        }
+        
+};
+#include <atcoder/modint.hpp>
+#include <atcoder/convolution>
+
+using mint=atcoder::modint998244353;
 int main() {
-    
+    ll n,m; cin>>n>>m;
+    vl a(n),b(m);
+    rep(i,n) cin>>a[i];
+    rep(i,m) cin>>b[i];
+    vector<ll> f(500001),g(500001);
+    factset fs(500001);
+    vl freqb(500001);
+    rep(i,m) freqb[b[i]]++;
+    rep(i,500001) {
+        f[i]=freqb[i]*fs.inv(i)%mod;
+        g[i]=fs.inv(i);
+    }
+    vl freqa(500010);
+    rep(i,n) freqa[a[i]]++;
+    auto conv=atcoder::convolution(f,g);
+    ll ans=0;
+    srep(i,1,500001) {
+        ll res=(fs.fact(i)*conv[i])%mod;
+        res*=freqa[i];
+        res%=mod;
+        ans+=res;
+        ans%=mod;
+    }
+    cout<<ans<<nl;
 }

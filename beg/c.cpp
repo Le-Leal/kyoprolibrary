@@ -68,32 +68,5 @@ int vec_contain(vector<ll> &a,ll val) {
 
 
 int main() {
-    ll n,a,b; cin>>n>>a>>b;
-    string s; cin>>s;
-    ll ans=0;
-    vl prefa(n+1),prefb(n+1); //i mozime (1-index)made
-    srep(i,1,n) {
-        prefa[i]=prefa[i-1]+(s[i-1]=='a');
-        prefb[i]=prefb[i-1]+(s[i-1]=='b');
-    }
-    //vout(prefa); cout<<nl; vout(prefb); cout<<nl;
-    srep(i,1,n) {
-        ll lef=i-1,rig=n+1;
-        while(rig-lef>1) {
-            ll mid=(rig+lef)/2;
-            if(prefa[mid]-prefa[i-1]>=a) rig=mid;
-            else lef=mid;
-        }
-        ll validleft=rig;
-        lef=i-1,rig=n+1;
-        while(rig-lef>1) {
-            ll mid=(rig+lef)/2;
-            if(prefb[mid]-prefb[i-1]<b) lef=mid;
-            else rig=mid;
-        }
-        ll validright=lef;
-        if(validleft<=validright) ans+=(validright-validleft+1);
-        //cout<<"i=="<<i<<" "<<validleft<<" "<<validright<<nl;
-    }
-    cout<<ans<<nl;
+    
 }

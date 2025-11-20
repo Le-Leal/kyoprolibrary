@@ -5,18 +5,26 @@ using ll = long long;
 
 template<class T, class comp=less<T>> class removable_queue {
     public:
+        ll count=0,sum=0;
         void push(const T &x) {
             que.push(x);
+            count++;
+            sum+=x;
             balance();
         }
         void pop() {
             assert(!que.empty());
             balance();
+            T v=que.top();
             que.pop();
+            --count;
+            sum-=(ll)v;
             balance();
         }
         void erase(const T &x) {
             del.push(x);
+            --count;
+            sum-=(ll)x;
             balance();
         }
         const T& top() {
@@ -25,12 +33,10 @@ template<class T, class comp=less<T>> class removable_queue {
             return que.top();
         }
         bool empty() {
-            balance();
-            return que.empty();
+            return count==0;
         }
         ll size() {
-            if((int)que.size()-(int)del.size()<0) assert(false);
-            return que.size()-del.size();
+            return (ll)count;
         }
     private:
         priority_queue<T,vector<T>,comp> que,del;

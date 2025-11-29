@@ -53,9 +53,9 @@ ll safemod(ll num,ll rule) {
 ll sum(vector<ll> &a) {
     return accumulate(all(a),0ll);
 }
-template<class T>void vvpr(vector<vector<T>> g) {
-    rep(i,g.size()) {
-        rep(j,g[i].size()) {
+template<class T>void vvpr(vector<vector<T>> g,ll h,ll w) {
+    rep(i,h) {
+        rep(j,w) {
             cout<<g[i][j]<<(j==g[i].size()-1 ? "\n":" ");
         }
     }
@@ -78,6 +78,41 @@ ll modpow(ll fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
     }
     return ret;
 }
+ll modpow2(ll fl,ll po,ll modulo) { //ninni mod
+    ll ret=1;
+    fl%=modulo;
+    while (po>0) {
+        if (po&1) ret=(ret*fl)%modulo;
+        fl=(fl*fl)%modulo;
+        po>>=1;
+    }
+    return ret;
+}
+
+struct cloud {
+    ll u,d,l,r;
+};
+pair<ll,ll> operator+(pair<ll,ll> a,pair<ll,ll> b) {
+    pair<ll,ll> res;
+    res.first=a.first+b.first;
+    res.second=a.second*b.second;
+    res.second%=998244353;
+    return res;
+}
+ll modinv(ll a, ll mod) { //拡張Euclidによるmodでの逆元, a*u+mod*v=1を解く
+	ll b=mod,u=1,v=0;
+	while (b) {
+		ll t=a/b;
+		a-=t*b;
+        swap(a,b);
+		u-=t*v;
+        swap(u,v);
+	}
+	u%=mod; 
+	if (u<0) u+=mod;
+	return u;
+}
 int main() {
     
+
 }

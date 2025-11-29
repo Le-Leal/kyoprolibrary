@@ -66,7 +66,10 @@ int vec_contain(vector<ll> &a,ll val) {
     return 0;
 }
 
-
+struct event {
+    ll time;
+    ll lef,rig;
+};
 int main() {
     
 }

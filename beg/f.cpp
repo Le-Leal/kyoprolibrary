@@ -105,7 +105,8 @@ class factset {
             return _inv[x];
         }
 
-        ll comb(ll nn,ll k,ll mode) {
+        ll comb(ll nn,ll k) {
+            if(nn<k) return 0;
             ll ans=1;
             ans*=_fact[nn];
             ans%=MOD;
@@ -116,33 +117,6 @@ class factset {
         }
         
 };
-#include <atcoder/modint.hpp>
-#include <atcoder/convolution>
-
-using mint=atcoder::modint998244353;
 int main() {
-    ll n,m; cin>>n>>m;
-    vl a(n),b(m);
-    rep(i,n) cin>>a[i];
-    rep(i,m) cin>>b[i];
-    vector<ll> f(500001),g(500001);
-    factset fs(500001);
-    vl freqb(500001);
-    rep(i,m) freqb[b[i]]++;
-    rep(i,500001) {
-        f[i]=freqb[i]*fs.inv(i)%mod;
-        g[i]=fs.inv(i);
-    }
-    vl freqa(500010);
-    rep(i,n) freqa[a[i]]++;
-    auto conv=atcoder::convolution(f,g);
-    ll ans=0;
-    srep(i,1,500001) {
-        ll res=(fs.fact(i)*conv[i])%mod;
-        res*=freqa[i];
-        res%=mod;
-        ans+=res;
-        ans%=mod;
-    }
-    cout<<ans<<nl;
+    
 }

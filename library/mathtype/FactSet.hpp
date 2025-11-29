@@ -37,7 +37,8 @@ class factset {
             return _inv[x];
         }
 
-        ll comb(ll nn,ll k,ll mode) {
+        ll comb(ll nn,ll k) {
+            if(nn<k) return 0;
             ll ans=1;
             ans*=_fact[nn];
             ans%=MOD;

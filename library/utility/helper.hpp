@@ -7,24 +7,6 @@ using ll = long long;
 #define MOD 998244353ll
 #define INF 9223300000000000000ll
 
-ll vecmax(vector<ll> &a) {
-    ll ans=-INF;
-    rep(i,(ll)a.size()) {
-        ans=max(ans,a[i]);
-    }
-    return ans;
-}
-
-ll vecmin(vector<ll> &a) {
-    ll ans=INF;
-    rep(i,(ll)a.size()) {
-        ans=min(ans,a[i]);
-    }
-    return ans;
-}
-
-
-
 template <class T> void vecpr(T first,T last) {
     ll tmp=0;
     for(auto it=first;it!=last;++it) {
@@ -73,7 +55,7 @@ ll modpowlarge(ll fl,string po,ll modulo) { // po がクソでかい用
     ll res=1%modulo;
     for (char c:po) {
         ll d=c-'0';
-        res=modpow2(res, 10, modulo);
+        res=modpow2(res,10,modulo);
         if(d) res=(res*modpow2(fl,d,modulo))%modulo;
     }
     return res;
@@ -104,7 +86,7 @@ ll modinv(ll a, ll mod) { //拡張Euclidによるmodでの逆元, a*u+mod*v=1を
         swap(u,v);
 	}
 	u%=mod; 
-	if (u < 0) u+=mod;
+	if (u<0) u+=mod;
 	return u;
 }
 

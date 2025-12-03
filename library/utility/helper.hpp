@@ -19,6 +19,7 @@ template <class T> void vecpr(T first,T last) {
 
 
 template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
+    #define MOD 998244353
     assert(po>=0);
     T ret(1);
     if (mode) {
@@ -35,6 +36,7 @@ template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=mod�
             po>>=1;
         }
     }
+    #undef MOD
     return ret;
 }
 

@@ -60,7 +60,19 @@ template<class T>void vvpr(vector<vector<T>> g) {
     }
 }
 //ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
-
+ll modinv(ll a, ll mod) { //拡張Euclidによるmodでの逆元, a*u+mod*v=1を解く
+	ll b=mod,u=1,v=0;
+	while (b) {
+		ll t=a/b;
+		a-=t*b;
+        swap(a,b);
+		u-=t*v;
+        swap(u,v);
+	}
+	u%=mod; 
+	if (u<0) u+=mod;
+	return u;
+}
 int main() {
     
 }

@@ -73,6 +73,17 @@ ll modinv(ll a, ll mod) { //拡張Euclidによるmodでの逆元, a*u+mod*v=1を
 	if (u<0) u+=mod;
 	return u;
 }
+
+ll modpow2(ll fl,ll po,ll modulo) { //ninni mod
+    ll ret=1;
+    fl%=modulo;
+    while (po>0) {
+        if (po&1) ret=(ret*fl)%modulo;
+        fl=(fl*fl)%modulo;
+        po>>=1;
+    }
+    return ret;
+}
 int main() {
     
-}
+} 

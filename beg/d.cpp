@@ -89,16 +89,6 @@ ll modpow2(ll fl,ll po,ll modulo) { //ninni mod
     return ret;
 }
 
-struct cloud {
-    ll u,d,l,r;
-};
-pair<ll,ll> operator+(pair<ll,ll> a,pair<ll,ll> b) {
-    pair<ll,ll> res;
-    res.first=a.first+b.first;
-    res.second=a.second*b.second;
-    res.second%=998244353;
-    return res;
-}
 ll modinv(ll a, ll mod) { //拡張Euclidによるmodでの逆元, a*u+mod*v=1を解く
 	ll b=mod,u=1,v=0;
 	while (b) {
@@ -114,5 +104,4 @@ ll modinv(ll a, ll mod) { //拡張Euclidによるmodでの逆元, a*u+mod*v=1を
 }
 int main() {
     
-
 }

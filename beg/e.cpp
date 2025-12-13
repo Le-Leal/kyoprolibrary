@@ -5,6 +5,7 @@ using namespace std;
 #define rep(i,n) for(ll i=0;i<n;i++)
 #define srep(i,l,r) for(ll i=l;i<=r;i++)
 #define irep(i,r,l) for(ll i=r;i>=l;i--)
+#define print(a) cout<<(a)<<nl;
 using ll = long long;
 using ld = long double;
 const ll mod=998244353;
@@ -58,7 +59,6 @@ template<class T>void vvpr(vector<vector<T>> g) {
         }
     }
 }
-
 int main() {
     
 }

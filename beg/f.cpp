@@ -79,6 +79,21 @@ template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=mod�
     }
     return ret;
 }
+ll n;
+string s;
+vector<char> stk;
+
 int main() {
-    
+    cin>>n;
+    cin>>s;
+    rep(i,n) {
+        stk.pb(s[i]);
+        while(stk.size()>=3 && stk[stk.size()-3]=='J' && stk[stk.size()-2]=='O' && stk[stk.size()-1]=='I') {
+            rep(i,3) stk.pop_back();
+            for(char c:"OIJ") stk.push_back(c);
+        }
+    }
+    string ans;
+    for(auto e:stk) ans+=e;
+    cout<<ans<<nl;
 }

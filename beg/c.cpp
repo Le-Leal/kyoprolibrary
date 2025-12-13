@@ -8,7 +8,7 @@ using namespace std;
 using ll = long long;
 using ld = long double;
 const ll mod=998244353;
-#define vout(v) for(auto i :v) cout<<i<<" ";
+#define vout(v) for(auto i :v) cout<<i<<" "; cout<<"\n";
 #define INF 9223300000000000000ll
 #define Winf 5e12
 #define nl "\n"
@@ -61,15 +61,6 @@ template<class T>void vvpr(vector<vector<T>> g) {
 }
 //ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
 
-int vec_contain(vector<ll> &a,ll val) {
-    rep(i,a.size()) if(a[i]==val) return 1;
-    return 0;
-}
-
-struct event {
-    ll time;
-    ll lef,rig;
-};
 int main() {
     
 }

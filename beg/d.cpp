@@ -8,8 +8,7 @@ using namespace std;
 using ll = long long;
 using ld = long double;
 const ll mod=998244353;
-using lint = __int128_t;
-#define vout(v) for(auto i :v) cout<<i<<" ";
+#define vout(v) for(auto i :v) cout<<i<<" "; cout<<"\n";
 #define INF 9223300000000000000ll
 #define Winf 5e12
 #define nl "\n"
@@ -53,55 +52,14 @@ ll safemod(ll num,ll rule) {
 ll sum(vector<ll> &a) {
     return accumulate(all(a),0ll);
 }
-template<class T>void vvpr(vector<vector<T>> g,ll h,ll w) {
-    rep(i,h) {
-        rep(j,w) {
+template<class T>void vvpr(vector<vector<T>> g) {
+    rep(i,g.size()) {
+        rep(j,g[i].size()) {
             cout<<g[i][j]<<(j==g[i].size()-1 ? "\n":" ");
         }
     }
 }
-//ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp;
-ll modpow(ll fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
-    lint ret=1;
-    if (mode) {
-        while (po>0) {
-            if (po&1) ret=(ret*fl)%mod;
-            fl=(fl*fl)%mod;
-            po>>=1;
-        }
-    } else {
-        while (po>0) {
-            if(po&1) ret*=fl;
-            fl*=fl;
-            po>>=1;
-        }
-    }
-    return ret;
-}
-ll modpow2(ll fl,ll po,ll modulo) { //ninni mod
-    ll ret=1;
-    fl%=modulo;
-    while (po>0) {
-        if (po&1) ret=(ret*fl)%modulo;
-        fl=(fl*fl)%modulo;
-        po>>=1;
-    }
-    return ret;
-}
-
-ll modinv(ll a, ll mod) { //拡張Euclidによるmodでの逆元, a*u+mod*v=1を解く
-	ll b=mod,u=1,v=0;
-	while (b) {
-		ll t=a/b;
-		a-=t*b;
-        swap(a,b);
-		u-=t*v;
-        swap(u,v);
-	}
-	u%=mod; 
-	if (u<0) u+=mod;
-	return u;
-}
+//ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
 int main() {
     
 }

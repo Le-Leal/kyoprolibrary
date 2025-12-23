@@ -59,8 +59,65 @@ template<class T>void vvpr(vector<vector<T>> g) {
         }
     }
 }
-//ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
+#define MOD 998244353
+template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
+    assert(po>=0);
+    T ret(1);
+    if (mode) {
+        fl%=T(MOD);
+        while (po>0) {
+            if (po&1) ret=(ret*fl)%T(MOD);
+            fl=(fl*fl)%T(MOD);
+            po>>=1;
+        }
+    } else {
+        while (po>0) {
+            if(po&1) ret*=fl;
+            fl*=fl;
+            po>>=1;
+        }
+    }
+    return ret;
+}
+class factset {
+    public:
+        vl _fact;
+        vl _inv;
+        ll __n;
+        factset(ll n):_fact(n+1),_inv(n+1),__n(n) {
+            _fact[0]=1;
+            srep(i,1,__n) {
+                _fact[i]=_fact[i-1]*i;
+                _fact[i]%=MOD;
+            }
+            _inv[__n]=modpow(_fact[__n],MOD-2,1);
+            for(int i=__n-1;i>=0;i--) {
+                _inv[i]=_inv[i+1]*(i+1);
+                _inv[i]%=MOD;
+            }
+        }
+        ll fact(ll x) {
+            assert(0<=x && x<=__n);
+            return _fact[x];
+        }
+        ll inv(ll x) {
+            assert(0<=x && x<=__n);
+            return _inv[x];
+        }
 
+        ll comb(ll nn,ll k) {
+            if(nn<k) return 0;
+            ll ans=1;
+            ans*=_fact[nn];
+            ans%=MOD;
+            ans*=_inv[nn-k];
+            ans%=MOD;
+            ans*=_inv[k];
+            return ans%MOD;
+        }
+        
+};
+//ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
 int main() {
     
 }

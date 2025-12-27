@@ -117,7 +117,9 @@ class factset {
         }
         
 };
-//ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
+
+
 int main() {
+    
     
 }

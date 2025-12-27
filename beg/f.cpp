@@ -184,49 +184,7 @@ template<typename t> class segtree {
             return rig;
         }
 };
-ll op(ll a,ll b) {
-    return max(a,b);
-}
-ll e() {
-    return -1e18;
-}
-ll op2(ll a,ll b) {
-    return min(a,b);
-}
-ll e2() {
-    return 1e18;
-}
+
 int main() {
-    ll n,q; cin>>n>>q;
-    vl xx(n),yy(n);
-    vl uu(n),vv(n);
-    rep(i,n) cin>>xx[i]>>yy[i];
-    rep(i,n) {
-        uu[i]=xx[i]+yy[i],vv[i]=xx[i]-yy[i];
-    }
-    segtree<ll> segumax(n,op,e),segvmax(n,op,e),segumin(n,op2,e2),segvmin(n,op2,e2);
-    rep(i,n) {
-        segumax.set(i,uu[i]);
-        segumin.set(i,uu[i]);
-        segvmax.set(i,vv[i]);
-        segvmin.set(i,vv[i]);
-    }
-    rep(i,q) {
-        ll ty; cin>>ty;
-        if(ty==1) {
-            ll ii,x,y; cin>>ii>>x>>y;
-            ii--;
-            segumax.set(ii,x+y);
-            segumin.set(ii,x+y);
-            segvmax.set(ii,x-y);
-            segvmin.set(ii,x-y);
-        }
-        else {
-            ll l,r,x,y; cin>>l>>r>>x>>y;
-            l--;
-            ll u=x+y,v=x-y;
-            ll ans=max({segumax.prod(l,r)-u,u-segumin.prod(l,r),segvmax.prod(l,r)-v,v-segvmin.prod(l,r)});
-            cout<<ans<<nl;
-        }
-    }
+    
 }

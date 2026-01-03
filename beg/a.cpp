@@ -87,5 +87,6 @@ ll modpow2(ll fl,ll po,ll modulo) { //ninni mod
 
 
 int main() {
-    
+    ll n; cin>>n;
+    cout<<modpow2(2,n,1000000000ll)-2*n<<nl;
 } 

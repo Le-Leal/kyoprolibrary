@@ -120,6 +120,28 @@ class factset {
 
 
 int main() {
-    
-    
+    ll n; cin>>n;
+    vector<ll> sqs;
+    for(ll i=1;i*i<n;i++) {
+        sqs.pb(i*i);
+    }
+    unordered_map<ll,ll> mp;
+    mp.reserve(n+10);
+    ll m=sqs.size();
+    rep(i,m) {
+        srep(j,i+1,m-1) {
+            if(sqs[i]+sqs[j]<=n) mp[sqs[i]+sqs[j]]++;
+        }
+    }
+    vl res;
+    for(auto it=mp.begin();it!=mp.end();it++) {
+        auto [k,v]=*it;
+        if(v==1) res.pb(k);
+    }
+    m=res.size();
+    cout<<m<<nl;
+    sort(all(res));
+    rep(i,m) {
+        cout<<res[i]<<(i==m-1 ? nl :" ");
+    }
 }

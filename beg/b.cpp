@@ -119,5 +119,14 @@ class factset {
 };
 
 int main() {
-    
+    ll n; cin>>n;
+    rep(i,10000) {
+        ll res=0;
+        string ns=to_string(n);
+        for(char c:ns) {
+            res+=(c-'0')*(c-'0');
+        }
+        n=res;
+    }
+    yn(n==1);
 }

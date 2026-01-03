@@ -9,7 +9,7 @@ using ll = long long;
 using ld = long double;
 const ll mod=998244353;
 using lint = __int128_t;
-#define vout(v) for(auto i :v) cout<<i<<" ";
+#define vout(v) for(auto i :v) cout<<i<<" "; cout<<nl;
 #define INF 9223300000000000000ll
 #define Winf 5e12
 #define nl "\n"
@@ -184,7 +184,53 @@ template<typename t> class segtree {
             return rig;
         }
 };
-
+ll op(ll a,ll b) {
+    return a+b;
+}
+ll e() {
+    return 0ll;
+}
+ll inv(ll x) {
+    return modpow(x,998244351ll,1);
+}
 int main() {
-    
+    ll n; cin>>n;
+    vl p(n);
+    rep(i,n) {
+        cin>>p[i];
+        p[i]--;
+    }
+    segtree<ll> segl(n,op,e),segr(n,op,e);
+    vl lef(n),rig(n);
+    rep(i,n) {
+        lef[i]=segl.prod(0,p[i]);
+        segl.add(p[i],1);
+    }
+    irep(i,n-1,0) {
+        rig[i]=segr.prod(0,p[i]);
+        segr.add(p[i],1);
+    }
+    //vout(lef); vout(rig);
+    vector<ll> ep2(n);
+    ep2[0]=1;
+    srep(i,1,n-1) {
+        ep2[i]=ep2[i-1]*2;
+        ep2[i]%=mod;
+    }
+    ll ans=0;
+    ll li2inv=0;
+    rep(i,n) {
+        ans+=(rig[i]*((ep2[i]*li2inv)%mod))%mod;
+        li2inv+=(lef[i]*inv(ep2[i]))%mod;
+        li2inv%=mod;
+        ans%=mod;
+    }
+    ans*=inv(2);
+    ans%=mod;
+    rep(i,n) {
+        ans+=lef[i]*rig[i];
+        ans%=mod;
+    }
+    ans%=mod;
+    cout<<ans<<nl;
 }

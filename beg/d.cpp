@@ -59,6 +59,26 @@ template<class T>void vvpr(vector<vector<T>> g) {
         }
     }
 }
+
+
 int main() {
-    
+    ll n; cin>>n;
+    vl a(n);
+    rep(i,n) cin>>a[i];
+    map<ll,ll> mp1;
+    ll ans=0;
+    rep(i,n) {
+        if((a[i]%5)==0) {
+            ans+=mp1[a[i]*7/5]*mp1[a[i]*3/5];
+        }
+        mp1[a[i]]++;
+    }
+    mp1.clear();
+    irep(i,n-1,0) {
+        if((a[i]%5)==0) {
+            ans+=mp1[a[i]*7/5]*mp1[a[i]*3/5];
+        }
+        mp1[a[i]]++;
+    }
+    cout<<ans<<nl;
 }

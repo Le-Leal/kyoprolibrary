@@ -87,6 +87,16 @@ ll modpow2(ll fl,ll po,ll modulo) { //ninni mod
 
 
 int main() {
-    ll n; cin>>n;
-    cout<<modpow2(2,n,1000000000ll)-2*n<<nl;
+    ll k; cin>>k;
+    ll ans=0;
+    srep(x3,2,k) {
+        srep(x2,2,k) {
+            ll x1=k-x3-x2;
+            if(x1<2) continue;
+            ll m2=x1+x2+x3-max({x1,x2,x3});
+            ans+=(((m2*(x3-1))%mod))*(((x2-1)*(x1-1))%mod);
+            ans%=mod;
+        }
+    }
+    cout<<ans<<nl;
 } 

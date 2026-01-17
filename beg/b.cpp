@@ -117,16 +117,50 @@ class factset {
         }
         
 };
-
+struct stone {
+    ll x,y,c;
+};
 int main() {
-    ll n; cin>>n;
-    rep(i,10000) {
-        ll res=0;
-        string ns=to_string(n);
-        for(char c:ns) {
-            res+=(c-'0')*(c-'0');
+    ll n,m; cin>>n>>m;
+    vector<stone> stn(m-1);
+    ll rs,re;
+    vector<vector<pair<ll,ll>>> g(2*n);
+    ll prec;
+    rep(i,m) {
+        ll x,y,c; cin>>x>>y>>c;
+        x--; y--;
+        if(i==0) {
+            if(x==y) {
+                cout<<c<<nl;
+                return 0;
+            }
+            rs=x;
+            re=y+n;
+            prec=c;
         }
-        n=res;
+        else {
+            if(x==y) continue;
+            g[y+n].pb({x,c});
+        }
     }
-    yn(n==1);
+    rep(i,n) g[i].pb({i+n,0});
+    priority_queue<pair<ll,ll>,vector<pair<ll,ll>>,greater<pair<ll,ll>>> pq;
+    pq.push({0,rs});
+    vl dist(2*n,INF);
+    dist[rs]=0;
+    while(!pq.empty()) {
+        auto [dis,v]=pq.top();
+        pq.pop();
+        if(dis>dist[v]) continue;
+        for(auto [nx,cost]:g[v]) {
+            ll nd=dis+cost;
+            if(nd>=dist[nx]) continue;
+            dist[nx]=nd;
+            pq.push({nd,nx});
+        }
+    }
+    //vout(dist);
+    if(dist[re]==INF) cout<<-1<<nl;
+    else cout<<dist[re]+prec<<nl;
+    return 0;
 }

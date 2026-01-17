@@ -117,31 +117,27 @@ class factset {
         }
         
 };
-
+bool isok(ll i,ll lim) {
+    return (0<=i && i<=lim);
+}
 
 int main() {
-    ll n; cin>>n;
-    vector<ll> sqs;
-    for(ll i=1;i*i<n;i++) {
-        sqs.pb(i*i);
+    factset fs(100000010);
+    ll n,m; cin>>n>>m;
+    ll ans=0;
+    ll la=0;
+    for(ll k=0;2*k<=n;k++) {
+        ans+=m*(n-2*k);
+        ans%=mod;
+        la=k;
     }
-    unordered_map<ll,ll> mp;
-    mp.reserve(n+10);
-    ll m=sqs.size();
-    rep(i,m) {
-        srep(j,i+1,m-1) {
-            if(sqs[i]+sqs[j]<=n) mp[sqs[i]+sqs[j]]++;
-        }
+    for(ll k=la+1;k<=n;k++) {
+        ans+=m*(2*k-n);
+        ans%=mod;
     }
-    vl res;
-    for(auto it=mp.begin();it!=mp.end();it++) {
-        auto [k,v]=*it;
-        if(v==1) res.pb(k);
+    rep(i,m+1) {
+        ans+=fs.comb(m,i);
+        ans%=mod;
     }
-    m=res.size();
-    cout<<m<<nl;
-    sort(all(res));
-    rep(i,m) {
-        cout<<res[i]<<(i==m-1 ? nl :" ");
-    }
+    cout<<ans<<nl;
 }

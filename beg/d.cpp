@@ -59,53 +59,7 @@ template<class T>void vvpr(vector<vector<T>> g) {
         }
     }
 }
-class intervalset {
-    ll max;
-    set<pair<ll,ll>> itv;
-    intervalset(ll n):max(n) {}
-    ll add(ll lef,ll rig) { //増えた数を返す
-        auto it=itv.lower_bound({lef,rig});
-        it--;
-        ll apply=0;
-        ll lost=0;
-        if(it->first<=lef && lef<=it->second) {
-            if(lef>it->first) lef=it->first;
-            if(rig<it->second) rig=it->second;
-            lost+=(it->second-it->first);
-            itv.erase(it);
-        }
-        it=itv.lower_bound({lef,rig});
-        while(1) {
-            if(it->first<=lef && it->first<=rig) {
-                if(lef>it->first) lef=it->first;
-                if(rig<it->second) rig=it->second;
-                lost+=(it->second-it->first);
-                it=itv.erase(it);
-            }
-        }
-        apply+=(rig-lef);
-        return apply-lost;
-    }
-    set<pair<ll,ll>> inner() {
-        return itv;
-    }
-};
 
 int main() {
-    ll n,q; cin>>n>>q;
-    vl a(n);
-    rep(i,n) cin>>a[i];
-    sort(all(a));
-    rep(qq,q) {
-        ll x,y; cin>>x>>y;
-        ll lef=-1,rig=1e11;
-        while(rig-lef>1) {
-            ll mid=(rig+lef)/2;
-            ll aa=mid-x+1;
-            ll res=upper_bound(all(a),mid)-upper_bound(all(a),x-1);
-            if(aa-res>=y) rig=mid;
-            else lef=mid;
-        }
-        cout<<rig<<nl;
-    }
+    
 }

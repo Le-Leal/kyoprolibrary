@@ -122,22 +122,5 @@ bool isok(ll i,ll lim) {
 }
 
 int main() {
-    factset fs(100000010);
-    ll n,m; cin>>n>>m;
-    ll ans=0;
-    ll la=0;
-    for(ll k=0;2*k<=n;k++) {
-        ans+=m*(n-2*k);
-        ans%=mod;
-        la=k;
-    }
-    for(ll k=la+1;k<=n;k++) {
-        ans+=m*(2*k-n);
-        ans%=mod;
-    }
-    rep(i,m+1) {
-        ans+=fs.comb(m,i);
-        ans%=mod;
-    }
-    cout<<ans<<nl;
+    
 }

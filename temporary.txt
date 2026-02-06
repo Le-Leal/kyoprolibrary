@@ -83,57 +83,48 @@ template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=mod�
 struct rect {
     ll u,d,l,r;
     rect(ll uu,ll dd,ll le,ll rr): u(uu),d(dd),l(le),r(rr) {}
-}
+};
 
 int main() {
     ll n,x,y; cin>>n>>x>>y;
-    set<rect> recs;
-    recs.insert(rect(0,y-1,0,x-1)); //[u,d,l,r]
+    vector<rect> recs;
+    recs.eb(rect(y-1,0,0,x-1)); //[u,d,l,r]
     rep(i,n) {
         char ope;
         ll line,diff;
         cin>>ope>>line>>diff;
         if(ope=='X') {
             vector<rect> add;
-            vector<rect> ers;
-            for(auto it=recs.begin();it!=recs.end();recs++) {
-                if(line<=(it->l)) {
-                    (it->u)-=diff;
-                    (it->d)-=diff;
+            for(auto it=recs.begin();it!=recs.end();it++) {
+                if(it->l<line && line<=it->r) {
+                    add.pb(rect((it->u)-diff,(it->d)-diff,(it->l),line-1));
+                    add.pb(rect((it->u)+diff,(it->d)+diff,line,(it->r)));
                 }
-                if((it->r)<=line) {
-                    (it->u)+=diff;
-                    (it->d)+=diff;
+                else if(line<=it->l) {
+                    add.pb(rect(it->u-diff,it->d-diff,it->l,it->r));
                 }
                 else {
-                    add.pb(rect((it->u)+diff,(it->d)+diff,(it->l),line-1));
-                    add.pb(rect((it->u)-diff,(it->d)-diff,line,(it->r)));
-                    ers.pb(*it);
+                    add.pb(rect(it->u+diff,it->d+diff,it->l,it->r));
                 }
+                
             }
-            for(auto rec:ers) rects.erase(rec);
-            for(auto rec:add) rects.insert(rec);
+            recs=add;
         }
         else {
             vector<rect> add;
-            vector<rect> ers;
-            for(auto it=recs.begin();it!=recs.end();recs++) {
-                if(line<=(it->u)) {
-                    (it->l)-=diff;
-                    (it->r)-=diff;
+            for(auto it=recs.begin();it!=recs.end();it++) {
+                if(it->d<line && line<=it->u) {
+                    add.pb(rect(line-1,it->d,it->l-diff,it->r-diff));
+                    add.pb(rect(it->u,line,it->l+diff,it->r+diff));
                 }
-                if((it->r)<=d) {
-                    it->u+=diff;
-                    it->d+=diff;
+                else if(line<=it->d) {
+                    add.pb(rect(it->u,it->d,it->l+diff,it->r+diff));
                 }
-                else {
-                    add.pb(rect(it->u,it->d,it->l,line-1));
-                    add.pb(rect(it->u-diff,it->d-diff,line,it->r));
-                    ers.pb(*it);
-                }
+                else add.pb(rect(it->u,it->d,it->l-diff,it->r-diff));
             }
-            for(auto rec:ers) rects.erase(rec);
-            for(auto rec:add) rects.insert(rec);
+            recs=add;
         }
+        for(rect a:recs) {cout<<a.u<<" "<<a.d<<" "<<a.l<<" "<<a.r<<nl;} cout<<"//////////"<<nl;
     }
+    
 }

@@ -59,33 +59,32 @@ template<class T>void vvpr(vector<vector<T>> g) {
         }
     }
 }
-//ファイル読み込みは第二フォルダから ex:include "mathtype/hoge.hpp"
-ll modinv(ll a, ll mod) { //拡張Euclidによるmodでの逆元, a*u+mod*v=1を解く
-	ll b=mod,u=1,v=0;
-	while (b) {
-		ll t=a/b;
-		a-=t*b;
-        swap(a,b);
-		u-=t*v;
-        swap(u,v);
-	}
-	u%=mod; 
-	if (u<0) u+=mod;
-	return u;
-}
-
-ll modpow2(ll fl,ll po,ll modulo) { //ninni mod
-    ll ret=1;
-    fl%=modulo;
-    while (po>0) {
-        if (po&1) ret=(ret*fl)%modulo;
-        fl=(fl*fl)%modulo;
-        po>>=1;
+#define MOD 998244353
+template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
+    assert(po>=0);
+    T ret(1);
+    if (mode) {
+        fl%=T(MOD);
+        while (po>0) {
+            if (po&1) ret=(ret*fl)%T(MOD);
+            fl=(fl*fl)%T(MOD);
+            po>>=1;
+        }
+    } else {
+        while (po>0) {
+            if(po&1) ret*=fl;
+            fl*=fl;
+            po>>=1;
+        }
     }
     return ret;
 }
 
-
+char small(char c) {
+    return 'a'+(c-'A');
+}
 int main() {
-    
-} 
+    string s; cin>>s;
+    s[0]=small(s[0]);
+    cout<<"Of"+s<<nl;
+}

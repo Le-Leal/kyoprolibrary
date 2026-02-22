@@ -13,19 +13,19 @@ struct ValueHavinguf {
     function<T(const T&, const T&)> op;
     int count;
 
-    ValueHavinguf(int N, function<T(const T&, const T&)> op_, const T& default_value=T())
-        : par(N), siz(N, 1), info(N), node(N, default_value), op(move(op_)), count(N) {
-        rep(i,N) {
+    ValueHavinguf(ll n, function<T(const T&, const T&)> op_, const T& def=T())
+        : par(n),siz(n,1),info(n),node(n, def),op(move(op_)),count(n) {
+        rep(i,n) {
             par[i]=i;
-            info[i]=default_value;
+            info[i]=def;
         }
     }
 
-    ValueHavinguf(const vector<T>& initial_info, function<T(const T&, const T&)> op_)
-        : par((int)initial_info.size()), siz(initial_info.size(), 1),
-          info(initial_info), node(initial_info),
-          op(move(op_)), count((int)initial_info.size()) {
-        rep(i,(int)par.size()) par[i]=i;
+    ValueHavinguf(const vector<T>& initial, function<T(const T&, const T&)> op_)
+        : par((ll)initial.size()), siz(initial.size(), 1),
+          info(initial), node(initial),
+          op(move(op_)), count((int)initial.size()) {
+        rep(i,(ll)par.size()) par[i]=i;
     }
 
     int root(int x){
@@ -40,13 +40,13 @@ struct ValueHavinguf {
             par[rx]=ry;
             siz[ry]+=siz[rx];
             siz[rx]=0;
-            info[ry]=op(info[rx], info[ry]);
+            info[ry]=op(info[rx],info[ry]);
             info[rx]=T();
         } else {
             par[ry]=rx;
             siz[rx]+=siz[ry];
             siz[ry]=0;
-            info[rx]=op(info[rx], info[ry]);
+            info[rx]=op(info[rx],info[ry]);
             info[ry]=T();
         }
         --count;

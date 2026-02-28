@@ -1,0 +1,92 @@
+[33m427957f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{0}: reset: moving to HEAD^
+[33me66bb18[m HEAD@{1}: reset: moving to HEAD^
+[33m8ea9376[m HEAD@{2}: reset: moving to HEAD^
+[33mbeb507d[m HEAD@{3}: reset: moving to HEAD^
+[33m4265f42[m HEAD@{4}: reset: moving to HEAD^
+[33m0990d7f[m[33m ([m[1;31morigin/main[m[33m)[m HEAD@{5}: reset: moving to HEAD^
+[33md9d4126[m HEAD@{6}: commit: ok
+[33m0990d7f[m[33m ([m[1;31morigin/main[m[33m)[m HEAD@{7}: commit: l
+[33m4265f42[m HEAD@{8}: pull --rebase (finish): returning to refs/heads/main
+[33m4265f42[m HEAD@{9}: pull --rebase (pick): afraid
+[33mbeb507d[m HEAD@{10}: pull --rebase (start): checkout beb507d55167bc9c4788e62e1c5b2fb618d55a07
+[33maa1752f[m HEAD@{11}: commit: afraid
+[33m8ea9376[m HEAD@{12}: commit: bef
+[33me66bb18[m HEAD@{13}: pull --rebase (finish): returning to refs/heads/main
+[33me66bb18[m HEAD@{14}: pull --rebase (pick): fix
+[33m427957f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{15}: pull --rebase (start): checkout 427957f85c38aaf23ca86cb4b798c65f77aeb14a
+[33md102796[m HEAD@{16}: commit: fix
+[33me2b6a65[m HEAD@{17}: commit: pushed
+[33m9ff0d29[m HEAD@{18}: commit: fixed
+[33me82350e[m HEAD@{19}: pull --rebase (finish): returning to refs/heads/main
+[33me82350e[m HEAD@{20}: pull --rebase (pick): fixe
+[33mefe7fca[m HEAD@{21}: pull --rebase (start): checkout efe7fca093a8dba260543aaa2c59e5a9573f1e06
+[33m92cc550[m HEAD@{22}: commit: fixe
+[33m4b91cea[m HEAD@{23}: commit: e
+[33m8b4d99e[m HEAD@{24}: pull --rebase (finish): returning to refs/heads/main
+[33m8b4d99e[m HEAD@{25}: pull --rebase (pick): fixed
+[33me674842[m HEAD@{26}: pull --rebase (pick): a
+[33m30fb63f[m HEAD@{27}: pull --rebase (start): checkout 30fb63f3726f8d19817fef652aefb4d9aefa8e27
+[33m6d513ab[m HEAD@{28}: commit: fixed
+[33mcba2c57[m HEAD@{29}: commit: a
+[33m0d07442[m HEAD@{30}: commit: last configation
+[33ma5274cd[m HEAD@{31}: commit: pushed
+[33m56cfc90[m HEAD@{32}: pull --rebase (finish): returning to refs/heads/main
+[33m56cfc90[m HEAD@{33}: pull --rebase (pick): yatta-
+[33maf0fa57[m HEAD@{34}: pull --rebase (start): checkout af0fa572360bb81627fae0eb78355fb4a56331a6
+[33m0e02244[m HEAD@{35}: commit: yatta-
+[33m2a52ecd[m HEAD@{36}: commit: pq
+[33m4e9c7ae[m HEAD@{37}: commit: pq
+[33m1d2d0b8[m HEAD@{38}: commit: yaru
+[33m6a8f793[m HEAD@{39}: commit: yaru
+[33m8be7e75[m HEAD@{40}: commit: ha-
+[33md03de41[m HEAD@{41}: commit: init before abc
+[33m7bfb112[m HEAD@{42}: commit: nya-n
+[33ma846c92[m HEAD@{43}: pull --rebase (finish): returning to refs/heads/main
+[33ma846c92[m HEAD@{44}: pull --rebase (pick): iroiroireta
+[33m7bbc397[m HEAD@{45}: pull --rebase (start): checkout 7bbc397fb87ad9a34871141a32fc366484f02cb0
+[33mc94c489[m HEAD@{46}: commit: iroiroireta
+[33m33a0ebf[m HEAD@{47}: commit: beforeABC
+[33m9de2dcd[m HEAD@{48}: pull --rebase (finish): returning to refs/heads/main
+[33m9de2dcd[m HEAD@{49}: pull --rebase (pick): fixed
+[33m06c1200[m HEAD@{50}: pull --rebase (start): checkout 06c12009a9ba4a0055630842898e488c9c707b83
+[33m8456a76[m HEAD@{51}: commit: fixed
+[33me39e4ee[m HEAD@{52}: commit: fix iroiro
+[33mb849cbb[m HEAD@{53}: commit: make geometry
+[33ma72cbe0[m HEAD@{54}: commit: make geometry
+[33md14d529[m HEAD@{55}: commit: make geometry
+[33m05527ea[m HEAD@{56}: commit: make geometry
+[33md88a6c8[m HEAD@{57}: commit: make geometry
+[33m1f24abb[m HEAD@{58}: commit: make geometry
+[33m85c037c[m HEAD@{59}: commit: ?
+[33md02cced[m HEAD@{60}: commit: ?
+[33me74222a[m HEAD@{61}: commit: reinitialized jsons
+[33m5020100[m HEAD@{62}: commit: A
+[33me932181[m HEAD@{63}: commit: terminate evils
+[33m6eeda51[m HEAD@{64}: commit: all fix
+[33m68bfeca[m HEAD@{65}: commit: umakuiku
+[33mcf83caa[m HEAD@{66}: commit: A
+[33mf6f10b6[m HEAD@{67}: rebase (finish): returning to refs/heads/main
+[33mf6f10b6[m HEAD@{68}: pull --rebase (start): checkout f6f10b61161598fd7873fe6c0b5d2ce4e235181d
+[33mf210ff1[m HEAD@{69}: commit: del
+[33m0bdc2af[m HEAD@{70}: commit: del
+[33m3bb70f3[m HEAD@{71}: rebase (finish): returning to refs/heads/main
+[33m3bb70f3[m HEAD@{72}: pull --rebase origin main (start): checkout 3bb70f35c7e27bd4c6ddebfc6adfed1e37f47962
+[33m2c5f8bf[m HEAD@{73}: rebase (abort): returning to refs/heads/main
+[33mf7277c4[m HEAD@{74}: commit: aaa
+[33m3bb70f3[m HEAD@{75}: pull --rebase (start): checkout 3bb70f35c7e27bd4c6ddebfc6adfed1e37f47962
+[33m2c5f8bf[m HEAD@{76}: commit: ?nani
+[33m3f7397d[m HEAD@{77}: commit: Remove duplicated docs/library/library artifacts
+[33m65c2eac[m HEAD@{78}: pull: Fast-forward
+[33mcf75954[m HEAD@{79}: commit: dou
+[33m3b94b3c[m HEAD@{80}: commit: dou
+[33m518ea3b[m HEAD@{81}: commit: w
+[33m06d2f8d[m HEAD@{82}: commit: git add .
+[33mf1d0143[m HEAD@{83}: commit: ikesou
+[33m9fb69f6[m HEAD@{84}: commit: ?
+[33mdcf2207[m HEAD@{85}: commit: ii
+[33mceb7e7b[m HEAD@{86}: pull --rebase origin main (finish): returning to refs/heads/main
+[33mceb7e7b[m HEAD@{87}: pull --rebase origin main (pick): initialized oj-docs
+[33m7b789c6[m HEAD@{88}: pull --rebase origin main (start): checkout 7b789c615e59d31b61f4b5d864ff2b16960dc464
+[33m5b27e0f[m HEAD@{89}: commit: initialized oj-docs
+[33m28ebb67[m HEAD@{90}: Branch: renamed refs/heads/master to refs/heads/main
+[33m28ebb67[m HEAD@{92}: commit (initial): Initial commit

@@ -8,7 +8,7 @@ using namespace std;
 using ll = long long;
 using ld = long double;
 const ll mod=998244353;
-#define vout(v) for(auto i :v) cout<<i<<" ";
+#define vout(v) for(auto i :v) cout<<i<<" "; cout<<nl;
 #define INF 9223300000000000000ll
 #define Winf 5e12
 #define nl "\n"
@@ -81,5 +81,56 @@ template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=mod�
 }
 
 int main() {
-    
+    ll q; cin>>q;
+    rep(tt,q) {
+        ll n; cin>>n;
+        vector<vl> g(n);
+        vl deg(n);
+        rep(i,n-1) {
+            ll a,b; cin>>a>>b;
+            g[--a].pb(--b);
+            g[b].pb(a);
+            deg[a]++;
+            deg[b]++;
+        }
+        ll sugata=0;
+        vl dpopen(n,0),dpclose(n,0);
+        vl par(n,-1);
+        function<void(ll)> dfs=[&](ll v)->void {
+            for(auto nx:g[v]) {
+                if(nx==par[v]) continue;
+                par[nx]=v;
+                dfs(nx);
+            }
+        };
+        dfs(0);
+        function<void(ll)> f=[&](ll v)->void {
+            if(deg[v]>=2) {
+                if(deg[v]>=3) dpopen[v]=1;
+                dpclose[v]=1;
+            }
+            ll ma=0,ma2=0;
+            for(auto cld:g[v]) {
+                if(cld==par[v]) continue;
+                f(cld);
+                if(deg[v]>=3) chmax(dpclose[v],dpopen[cld]+1);
+                if(deg[v]>=4) {
+                    chmax(dpopen[v],dpopen[cld]+1);
+                    if(ma<=dpopen[cld]) {
+                        ma2=ma;
+                        ma=dpopen[cld];
+                    }
+                    else if(ma2<dpopen[cld]) {
+                        ma2=dpopen[cld];
+                    }
+                }
+                chmax(dpclose[v],ma+ma2+1);
+                
+            }
+
+        };
+        f(0);
+        //vout(dpclose); vout(dpopen);
+        cout<<max(*max_element(all(dpclose)),*max_element(all(dpopen)))<<nl;
+    }
 }

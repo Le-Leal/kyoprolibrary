@@ -83,26 +83,5 @@ template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=mod�
 
 
 int main() {
-    ll n,m; cin>>n>>m;
-    vector<vl> want(n);
-    rep(i,n) {
-        ll l; cin>>l;
-        rep(j,l) {
-            ll a; cin>>a;
-            want[i].pb(a);
-        }
-    }
-    vector<bool> est(m+1,1);
-    rep(i,n) {
-        bool get=0;
-        rep(j,want[i].size()) {
-            if(est[want[i][j]]) {
-                cout<<want[i][j]<<nl;
-                est[want[i][j]]=0;
-                get=1;
-                break;
-            }
-        }
-        if(!get) cout<<0<<nl;
-    }
+    
 }

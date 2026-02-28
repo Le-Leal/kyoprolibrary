@@ -89,7 +89,7 @@ template<typename t> class segtree {
             while(ind>>=1) seg[ind]=op(seg[2*ind],seg[2*ind+1]);
         }
 
-        t oneget(ll ind) {
+        t get(ll ind) {
             return seg[ind+siz];
         }
 
@@ -142,40 +142,6 @@ template<typename t> class segtree {
             return rig;
         }
 };
-
-ll op(ll a,ll b) {
-    return a+b;
-}
-ll e() {
-    return 0ll;
-}
-
 int main() {
-    ll t; cin>>t;
-    rep(tt,t) {
-        ll n,d; cin>>n>>d;
-        vl a(n),b(n);
-        rep(i,n) cin>>a[i];
-        rep(i,n) cin>>b[i];
-        segtree<ll> seg(n,op,e);
-        ll see=0;
-        rep(i,n) {
-            seg.add(i,a[i]);
-            while(b[i]>0) {
-                if(b[i]>=seg.oneget(see)) {
-                    //if(see==n) assert(false);
-                    b[i]-=seg.oneget(see);
-                    seg.set(see,0);
-                    see++;
-                }
-                else {
-                    seg.add(see,-b[i]);
-                    b[i]=0;
-                }
-            }
-            if(d<=i) seg.set(i-d,0);
-        }
-        //vout(seg.seg);
-        cout<<seg.allprod()<<nl;
-    }
+    
 }

@@ -80,11 +80,6 @@ template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=mod�
     return ret;
 }
 
-char small(char c) {
-    return 'a'+(c-'A');
-}
 int main() {
-    string s; cin>>s;
-    s[0]=small(s[0]);
-    cout<<"Of"+s<<nl;
+    
 }

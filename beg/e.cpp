@@ -95,38 +95,48 @@ template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=mod�
 }
 
 
-int main() {
-    ll n,m; cin>>n>>m;
-    vector<vl> g(n);
-    vector<vl> dirg(n);
-    vector<vl> rev(n);
-    rep(i,m) {
-        ll u,v; cin>>u>>v;
-        u--;v--;
-        g[u].pb(v);
-        rev[v].pb(u);
-        if(u<v) dirg[u].pb(v);
-    }
-    rep(i,n) sort(all(rev[i]));
-    queue<ll> que;
-    vl used(n);
-    used[0]=1;
-    que.push(0);
-    while(!que.empty()) {
-        ll v=que.front();
-        que.pop();
-        for(auto nx:dirg[v]) {
-            if(used[nx]) continue;
-            used[nx]=1;
-            que.push(nx);
+template<class T> class fastms {
+    public:
+        set<T> st;
+        unordered_map<T,ll> cnt;
+        ll size_all=0;
+        fastms() {}
+        void insert(T x) {
+            if(!cnt.count(x)) st.insert(x);
+            else if(cnt[x]==0) st.insert(x);
+            cnt[x]++;
+            size_all++;
         }
-    }
-    vl ans(n);
-    rep(i,n) {
-        if(used[i]==0) {
-            ans[i]=-1;
-            continue;
+        void erase(T x) {
+            assert(cnt[x]>=1);
+            if(cnt[x]==1) st.erase(x);
+            cnt[x]--;
+            size_all--;
         }
+        ll count(T x) {
+            if(!cnt.count(x)) return 0ll;
+            else return cnt[x];
+        }
+        ll lower_bound(ll x) {
+            return distance(st.begin(),st.lower_bound(x));
+        }
+        ll upper_bound(ll x) {
+            return distance(st.begin(),st.upper_bound(x));
+        }
+        ll size() {
+            return size_all;
+        }
+        ll kind() {
+            return st.size();
+        }
+        
+};
 
-    }
+struct query {
+    ll idx;
+    ll lef,rig;
+};
+
+int main() {
+    
 }

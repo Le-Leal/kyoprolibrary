@@ -79,9 +79,6 @@ template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=mod�
     }
     return ret;
 }
-
-
-
 int main() {
     
 }

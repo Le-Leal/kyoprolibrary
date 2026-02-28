@@ -93,7 +93,6 @@ int main() {
             deg[a]++;
             deg[b]++;
         }
-        ll sugata=0;
         vl dpopen(n,0),dpclose(n,0);
         vl par(n,-1);
         function<void(ll)> dfs=[&](ll v)->void {
@@ -130,7 +129,6 @@ int main() {
 
         };
         f(0);
-        //vout(dpclose); vout(dpopen);
         cout<<max(*max_element(all(dpclose)),*max_element(all(dpopen)))<<nl;
     }
 }

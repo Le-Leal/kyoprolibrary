@@ -8,7 +8,7 @@ using namespace std;
 using ll = long long;
 using ld = long double;
 const ll mod=998244353;
-#define vout(v) for(auto i :v) cout<<i<<" "; cout<<"\n";
+#define vout(v) for(auto i :v) cout<<i<<" "; cout<<nl;
 #define INF 9223300000000000000ll
 #define Winf 5e12
 #define nl "\n"
@@ -54,88 +54,12 @@ ll sum(vector<ll> &a) {
 }
 template<class T>void vvpr(vector<vector<T>> g) {
     rep(i,g.size()) {
+        cout<<"here: i="<<i<<" ";
         rep(j,g[i].size()) {
             cout<<g[i][j]<<(j==g[i].size()-1 ? "\n":" ");
         }
     }
 }
-ll modinv(ll a, ll mod) { //拡張Euclidによるmodでの逆元, a*u+mod*v=1を解く
-	ll b=mod,u=1,v=0;
-	while (b) {
-		ll t=a/b;
-		a-=t*b;
-        swap(a,b);
-		u-=t*v;
-        swap(u,v);
-	}
-	u%=mod; 
-	if (u<0) u+=mod;
-	return u;
-}
-
-#define MOD 998244353
-template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
-    assert(po>=0);
-    T ret(1);
-    if (mode) {
-        fl%=T(MOD);
-        while (po>0) {
-            if (po&1) ret=(ret*fl)%T(MOD);
-            fl=(fl*fl)%T(MOD);
-            po>>=1;
-        }
-    } else {
-        while (po>0) {
-            if(po&1) ret*=fl;
-            fl*=fl;
-            po>>=1;
-        }
-    }
-    return ret;
-}
-
-
-template<class T> class fastms {
-    public:
-        set<T> st;
-        unordered_map<T,ll> cnt;
-        ll size_all=0;
-        fastms() {}
-        void insert(T x) {
-            if(!cnt.count(x)) st.insert(x);
-            else if(cnt[x]==0) st.insert(x);
-            cnt[x]++;
-            size_all++;
-        }
-        void erase(T x) {
-            assert(cnt[x]>=1);
-            if(cnt[x]==1) st.erase(x);
-            cnt[x]--;
-            size_all--;
-        }
-        ll count(T x) {
-            if(!cnt.count(x)) return 0ll;
-            else return cnt[x];
-        }
-        ll lower_bound(ll x) {
-            return distance(st.begin(),st.lower_bound(x));
-        }
-        ll upper_bound(ll x) {
-            return distance(st.begin(),st.upper_bound(x));
-        }
-        ll size() {
-            return size_all;
-        }
-        ll kind() {
-            return st.size();
-        }
-        
-};
-
-struct query {
-    ll idx;
-    ll lef,rig;
-};
 
 int main() {
     

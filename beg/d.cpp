@@ -8,7 +8,7 @@ using namespace std;
 using ll = long long;
 using ld = long double;
 const ll mod=998244353;
-#define vout(v) for(auto i :v) cout<<i<<" "; cout<<"\n";
+#define vout(v) for(auto i :v) cout<<i<<" "; cout<<nl;
 #define INF 9223300000000000000ll
 #define Winf 5e12
 #define nl "\n"

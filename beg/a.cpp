@@ -1,5 +1,3 @@
-#pragma GCC optimize("O3")
-#pragma GCC optimize("unroll-loops")
 #include <bits/stdc++.h>
 using namespace std;
 #define rep(i,n) for(ll i=0;i<n;i++)
@@ -59,76 +57,41 @@ template<class T>void vvpr(vector<vector<T>> g) {
         }
     }
 }
-#define MOD 998244353
-template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
-    assert(po>=0);
-    T ret(1);
-    if (mode) {
-        fl%=T(MOD);
-        while (po>0) {
-            if (po&1) ret=(ret*fl)%T(MOD);
-            fl=(fl*fl)%T(MOD);
-            po>>=1;
-        }
-    } else {
-        while (po>0) {
-            if(po&1) ret*=fl;
-            fl*=fl;
-            po>>=1;
-        }
-    }
-    return ret;
-}
 
 int main() {
-    ll q; cin>>q;
-    rep(tt,q) {
-        ll n; cin>>n;
-        vector<vl> g(n);
-        vl deg(n);
-        rep(i,n-1) {
-            ll a,b; cin>>a>>b;
-            g[--a].pb(--b);
-            g[b].pb(a);
-            deg[a]++;
-            deg[b]++;
+    ll n; cin>>n;
+    vl x(n),y(n);
+    rep(i,n) cin>>x[i]>>y[i];
+    ll xr=vecmax(x)-vecmin(x);
+    ll yr=vecmax(y)-vecmin(y);
+    ll blk=(ll)sqrtl(xr*yr/n);
+    if(blk==0) blk=1;
+    vl iot(n);
+    ll mx=vecmin(x);
+    rep(i,n) iot[i]=i;
+    sort(all(iot),[&](ll a,ll b) {
+        if((x[a]-mx)/blk==(x[b]-mx)/blk) {
+            if(!(((x[a]-mx)/blk)%2)) {
+                if(y[a]==y[b]) return a<b;
+                return y[a]<y[b];
+            }
+            else {
+                if(y[a]==y[b]) return a<b;
+                return y[a]>y[b];
+            }
         }
-        vl dpopen(n,0),dpclose(n,0);
-        vl par(n,-1);
-        function<void(ll)> dfs=[&](ll v)->void {
-            for(auto nx:g[v]) {
-                if(nx==par[v]) continue;
-                par[nx]=v;
-                dfs(nx);
-            }
-        };
-        dfs(0);
-        function<void(ll)> f=[&](ll v)->void {
-            if(deg[v]>=2) {
-                if(deg[v]>=3) dpopen[v]=1;
-                dpclose[v]=1;
-            }
-            ll ma=0,ma2=0;
-            for(auto cld:g[v]) {
-                if(cld==par[v]) continue;
-                f(cld);
-                if(deg[v]>=3) chmax(dpclose[v],dpopen[cld]+1);
-                if(deg[v]>=4) {
-                    chmax(dpopen[v],dpopen[cld]+1);
-                    if(ma<=dpopen[cld]) {
-                        ma2=ma;
-                        ma=dpopen[cld];
-                    }
-                    else if(ma2<dpopen[cld]) {
-                        ma2=dpopen[cld];
-                    }
-                }
-                chmax(dpclose[v],ma+ma2+1);
-                
-            }
-
-        };
-        f(0);
-        cout<<max(*max_element(all(dpclose)),*max_element(all(dpopen)))<<nl;
+        return (x[a]-mx)/blk<(x[b]-mx)/blk;
+    });
+    ll z=-1;
+    rep(i,n) {
+        if(iot[i]==0) z=i;
     }
+    vl ans;
+    srep(i,z,n-1) {
+       ans.pb((iot[i])+1); 
+    }
+    rep(i,z) {
+        ans.pb((iot[i])+1);
+    }
+    vout(ans);
 }

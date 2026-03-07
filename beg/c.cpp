@@ -60,6 +60,48 @@ template<class T>void vvpr(vector<vector<T>> g) {
     }
 }
 
+template<class T> class fastms {
+    public:
+        set<T> st;
+        unordered_map<T,ll> cnt;
+        void insert(T x) {
+            if(!cnt.count(x)) st.insert(x);
+            else if(cnt[x]==0) st.insert(x);
+            cnt[x]++;
+        }
+        void erase(T x) {
+            assert(cnt[x]>=1);
+            if(cnt[x]==1) st.erase(x);
+            cnt[x]--;
+        }
+        ll count(T x) {
+            if(!cnt.count(x)) return 0ll;
+            else return cnt[x];
+        }
+        ll lower_bound(ll x) {
+            return distance(st.begin(),st.lower_bound(x));
+        }
+        ll upper_bound(ll x) {
+            return distance(st.begin(),st.upper_bound(x));
+        }
+};
+
+
+
 int main() {
-    
+    ll n,q; cin>>n>>q;
+    vl a(n);
+    rep(i,n) cin>>a[i];
+    fastms<ll> ms;
+    rep(i,n) ms.insert(a[i]);
+    rep(i,q) {
+        ll k; cin>>k;
+        vl b(k);
+        rep(j,k) cin>>b[j];
+        rep(j,k) {
+            ms.erase(a[--b[j]]);
+        }
+        cout<<*(ms.st.begin())<<nl;
+        rep(j,k) ms.insert(a[b[j]]);
+    }
 }

@@ -80,5 +80,17 @@ template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=mod�
     return ret;
 }
 int main() {
-    
+    ll n,m; cin>>n>>m;
+    vl c(m);
+    rep(i,m) cin>>c[i];
+    vl d(m);
+    rep(i,n) {
+        ll a,b; cin>>a>>b;
+        d[--a]+=b;
+    }
+    ll ans=0;
+    rep(i,m) {
+        ans+=min(d[i],c[i]);
+    }
+    cout<<ans<<nl;
 }

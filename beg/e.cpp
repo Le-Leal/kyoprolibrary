@@ -61,6 +61,67 @@ template<class T>void vvpr(vector<vector<T>> g) {
     }
 }
 
+ll modpow2(ll fl,ll po,ll modulo) { //ninni mod
+    ll ret=1;
+    fl%=modulo;
+    while (po>0) {
+        if (po&1) ret=(ret*fl)%modulo;
+        fl=(fl*fl)%modulo;
+        po>>=1;
+    }
+    return ret;
+}
+
+ll modinv(ll a, ll mod) {
+	ll b=mod,u=1,v=0;
+	while (b) {
+		ll t=a/b;
+		a-=t*b;
+        swap(a,b);
+		u-=t*v;
+        swap(u,v);
+	}
+	u%=mod; 
+	if (u<0) u+=mod;
+	return u;
+}
+
+ll inv(ll a,ll m) {
+    return modinv(a,10007*m);
+}
+
+ll calcrep(ll l,ll modulo) {
+    vl r2be(35);
+    r2be[0]=1;
+    srep(i,1,34) {
+        r2be[i]=r2be[i-1]*modpow2(10,1ll<<(i-1),modulo)+r2be[i-1];
+        r2be[i]%=modulo;
+    }
+    ll res=0;
+    ll i=0;
+    while(l) {
+        if(l&1) {
+            res=(res*modpow2(10,1ll<<(i),modulo)+r2be[i]);
+            res%=modulo;
+        }
+        l>>=1;
+        i++;
+    }
+    return res;
+}
+
+#define MOD 10007
 int main() {
-    
+    ll m,k; cin>>k>>m;
+    ll n=0;
+    rep(i,k) {
+        ll c,l; cin>>c>>l;
+        n*=modpow2(10,l,MOD*m);
+        n%=MOD*m;
+        ll add=c*calcrep(l,MOD*m);
+        add=safemod(add,MOD*m);
+        n+=add;
+        n%=MOD*m;
+    }
+    cout<<(n/m)%MOD<<nl;
 }

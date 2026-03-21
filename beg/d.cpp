@@ -54,32 +54,13 @@ ll sum(vector<ll> &a) {
 }
 template<class T>void vvpr(vector<vector<T>> g) {
     rep(i,g.size()) {
+        cout<<"here: i="<<i<<" ";
         rep(j,g[i].size()) {
             cout<<g[i][j]<<(j==g[i].size()-1 ? "\n":" ");
         }
     }
 }
-#define MOD 1000000007ll
-template<class T> T modpow(T fl, ll po, ll mode) {  // mode: 0=modなし, 1=modあり
-    assert(po>=0);
-    T ret(1);
-    if (mode) {
-        fl%=T(MOD);
-        while (po>0) {
-            if (po&1) ret=(ret*fl)%T(MOD);
-            fl=(fl*fl)%T(MOD);
-            po>>=1;
-        }
-    } else {
-        while (po>0) {
-            if(po&1) ret*=fl;
-            fl*=fl;
-            po>>=1;
-        }
-    }
-    return ret;
-}
+
 int main() {
-    ll m,k; cin>>k>>m;
-    ll n=0;
+    
 }

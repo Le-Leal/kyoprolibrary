@@ -89,19 +89,5 @@ template<class T> class fastms {
 
 
 int main() {
-    ll n,q; cin>>n>>q;
-    vl a(n);
-    rep(i,n) cin>>a[i];
-    fastms<ll> ms;
-    rep(i,n) ms.insert(a[i]);
-    rep(i,q) {
-        ll k; cin>>k;
-        vl b(k);
-        rep(j,k) cin>>b[j];
-        rep(j,k) {
-            ms.erase(a[--b[j]]);
-        }
-        cout<<*(ms.st.begin())<<nl;
-        rep(j,k) ms.insert(a[b[j]]);
-    }
+    
 }

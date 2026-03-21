@@ -59,39 +59,5 @@ template<class T>void vvpr(vector<vector<T>> g) {
 }
 
 int main() {
-    ll n; cin>>n;
-    vl x(n),y(n);
-    rep(i,n) cin>>x[i]>>y[i];
-    ll xr=vecmax(x)-vecmin(x);
-    ll yr=vecmax(y)-vecmin(y);
-    ll blk=(ll)sqrtl(xr*yr/n);
-    if(blk==0) blk=1;
-    vl iot(n);
-    ll mx=vecmin(x);
-    rep(i,n) iot[i]=i;
-    sort(all(iot),[&](ll a,ll b) {
-        if((x[a]-mx)/blk==(x[b]-mx)/blk) {
-            if(!(((x[a]-mx)/blk)%2)) {
-                if(y[a]==y[b]) return a<b;
-                return y[a]<y[b];
-            }
-            else {
-                if(y[a]==y[b]) return a<b;
-                return y[a]>y[b];
-            }
-        }
-        return (x[a]-mx)/blk<(x[b]-mx)/blk;
-    });
-    ll z=-1;
-    rep(i,n) {
-        if(iot[i]==0) z=i;
-    }
-    vl ans;
-    srep(i,z,n-1) {
-       ans.pb((iot[i])+1); 
-    }
-    rep(i,z) {
-        ans.pb((iot[i])+1);
-    }
-    vout(ans);
+    
 }

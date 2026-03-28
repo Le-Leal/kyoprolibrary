@@ -19,11 +19,11 @@ bool millar_labin(ll n) {
         ++s;
         d>>=1;
     }
-    for(auto a : tests[flag]) {
+    for(auto a:tests[flag]) {
         if(n<=a) return true;
         __int128_t x=1,a2=a%n,d2=d;
         while (d2) {
-            if (d2 & 1) x=x*a2%n;
+            if (d2&1) x=x*a2%n;
             a2=a2*a2%n;
             d2>>=1;
         }

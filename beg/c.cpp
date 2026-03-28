@@ -87,7 +87,6 @@ template<class T> class fastms {
 };
 
 
-
 int main() {
     
 }

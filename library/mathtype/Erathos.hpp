@@ -55,14 +55,17 @@ vector<vector<pair<ll,int>>> factor_range(ll L,ll R){ //lef以上rig以下のも
     vector<ll> v(n);
     iota(v.begin(),v.end(),L);
     vector<vector<pair<ll,int>>> res(n);
-    for(ll p=2; p*p<=R; ++p){
+    for(ll p=2;p*p<=R;++p){
         ll s=max(p*p,(L+p-1)/p*p);
-        for(ll j=s; j<=R; j+=p){
-            int i=j-L, c=0;
-            while(v[i] % p == 0) v[i]/=p, ++c;
+        for(ll j=s;j<=R;j+=p){
+            int i=j-L,c=0;
+            while(v[i]%p==0) {
+                v[i]/=p;
+                ++c;
+            }
             if(c) res[i].emplace_back(p,c);
         }
     }
-    rep(i,n) if(v[i] > 1) res[i].emplace_back(v[i],1);
+    rep(i,n) if(v[i]>1) res[i].emplace_back(v[i],1);
     return res;
 }

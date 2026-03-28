@@ -63,5 +63,4 @@ template<class T>void vvpr(vector<vector<T>> g) {
 
 
 int main() {
-    
 }
